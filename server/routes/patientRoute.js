@@ -31,5 +31,8 @@ router.post("/registerpatient", (request, response) => {
                 console.log("error", error);
             });
     });
+    response.json({
+        'statuscode': response.statusCode
+    })
 });
 module.exports = router;

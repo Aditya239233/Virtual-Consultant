@@ -36,6 +36,10 @@ const patientSchema = mongoose.Schema({
     },
     allergies: {
         type: String
+    },
+    confirm_password: {
+        type: String,
+        required: true
     }
 });
 module.exports = mongoose.model('patient', patientSchema);

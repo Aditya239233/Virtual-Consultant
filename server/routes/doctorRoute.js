@@ -12,29 +12,27 @@ router.post("/registerdoctor", (request, response) => {
         email: request.body.email,
         password: request.body.password,
         username: request.body.username,
+        confirm_password: request.body.confirm_password
     });
-    new_doctor
-        .save()
-        .then((data) => {
-            console.log("successfully created a new doctor account");
-        })
-        .catch((error) => {
-            console.log("error", error);
-        });
 
-    //   bcrypt.hash(new_doctor.password, 10, function (err, hash) {
-    //     if (err) {
-    //       return next(err);
-    //     }
-    //     new_doctor.password = hash;
-    //     new_doctor
-    //       .save()
-    //       .then((data) => {
-    //         console.log("successfully created a new doctor account");
-    //       })
-    //       .catch((error) => {
-    //         console.log("error", error);
-    //       });
-    //   });
+    bcrypt.hash(new_doctor.password, 10, function (err, hash) {
+        if (err) {
+            return next(err);
+        }
+        new_doctor.password = hash;
+        new_doctor.confirm_password = hash;
+        new_doctor
+            .save()
+            .then((data) => {
+                console.log("successfully created a new doctor account");
+            })
+            .catch((error) => {
+                console.log("error", error);
+            });
+    });
+    console.log(response.statusCode);
+    response.json({
+        'statuscode': response.statusCode
+    })
 });
 module.exports = router;

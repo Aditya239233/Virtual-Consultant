@@ -27,5 +27,9 @@ const doctorSchema = mongoose.Schema({
         type: String,
         require: true,
     },
+    confirm_password: {
+        type: String,
+        require: true
+    }
 });
 module.exports = mongoose.model("doctor", doctorSchema);
