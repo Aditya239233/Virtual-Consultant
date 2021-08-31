@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const patient = require("../model/patient.js");
 const router = express.Router();
 router.post("/registerpatient", (request, response) => {
-    console.log(response.statusCode);
     const new_patient = new patient({
         first_name: request.body.first_name,
         last_name: request.body.last_name,

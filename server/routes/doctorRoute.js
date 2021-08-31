@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const doctor = require("../model/doctor.js");
 const router = express.Router();
 router.post("/registerdoctor", (request, response) => {
-    console.log(request.body)
     const new_doctor = new doctor({
         first_name: request.body.first_name,
         last_name: request.body.last_name,
