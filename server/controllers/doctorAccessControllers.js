@@ -3,6 +3,17 @@ const doctor = require("../model/doctor");
 
 const doctorRegister= async (request, response) => {
     console.log(request.body)
+    try{
+        const doctorExists = await doctor.findOne({ medical_id: request.body.medical_id});
+        if(doctorExists) 
+        {
+            return response.status(409).send('This doctor already exists');
+        }
+
+    }
+    catch(error){
+        response.status(400).send(error);
+    }
     const new_doctor = new doctor({
         first_name: request.body.first_name,
         last_name: request.body.last_name,
