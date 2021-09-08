@@ -23,7 +23,7 @@ const patientRegister= async (request, response) => {
         age: request.body.age,
         weight: request.body.weight,
         height: request.body.height,
-        bmi: request.body.bmi,
+        bmi: request.body.weight/(request.body.height*request.body.height),
         allergies: request.body.allergies,
         confirm_password: request.body.confirm_password
     });
