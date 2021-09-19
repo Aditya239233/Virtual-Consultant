@@ -1,19 +1,36 @@
 import React from "react";
-import {
-  Nav,
-  NavbarContainer,
-  NavLogo,
-  NavMenu,
-  NavItem,
-  NavLinks,
-  NavBtnLink,
-  NavBtn,
-} from "./NavbarElements";
+import { Link as LinkR } from "react-router-dom";
+import { Link as LinkS } from "react-scroll";
+import "./index.css";
 
 const Navbar = () => {
   return (
     <>
-      <Nav>
+      <nav class="navbar">
+        <div class="navbar-container">
+          <LinkR to="/" class="logo">
+            Virtual Consultant
+          </LinkR>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <LinkS to="/about" class="nav-links">
+                About
+              </LinkS>
+            </li>
+            <li class="nav-item">
+              <LinkS to="/services" class="nav-links">
+                Services
+              </LinkS>
+            </li>
+          </ul>
+          <nav class="nav-button">
+            <LinkR class="nav-button-link" to="/login">
+              Sign In
+            </LinkR>
+          </nav>
+        </div>
+      </nav>
+      {/* <Nav>
         <NavbarContainer>
           <NavLogo to="/">Virtual Consultant</NavLogo>
           <NavMenu>
@@ -28,7 +45,7 @@ const Navbar = () => {
             <NavBtnLink to="/signin">Sign In</NavBtnLink>
           </NavBtn>
         </NavbarContainer>
-      </Nav>
+      </Nav> */}
     </>
   );
 };
