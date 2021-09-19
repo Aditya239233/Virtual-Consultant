@@ -1,35 +1,36 @@
-import React from 'react'
-import { FaBars } from 'react-icons/fa'
-import {Nav,NavbarContainer,NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtnLink, NavBtn} from './NavbarElements';
-import SignIn from '../SignIn/SignIn';
+import React from "react";
+import {
+  Nav,
+  NavbarContainer,
+  NavLogo,
+  NavMenu,
+  NavItem,
+  NavLinks,
+  NavBtnLink,
+  NavBtn,
+} from "./NavbarElements";
 
-const Navbar = ({toggle}) => {
-    return (
-        <>
-            <Nav>
-              <NavbarContainer>
-                  <NavLogo to='/'>Virtual Consultant</NavLogo>
-                  <MobileIcon onClick={toggle}>
-                    <FaBars />
-                  </MobileIcon>
-                  <NavMenu>
-                    <NavItem>
-                        <NavLinks to='about'>About</NavLinks>
-                    </NavItem>
-                    <NavItem>
-                        <NavLinks to='services'>Services</NavLinks>
-                    </NavItem>
-                    <NavItem>
-                        <NavLinks to='signup'>Sign Up</NavLinks>
-                    </NavItem>
-                  </NavMenu>
-                  <NavBtn>
-                      <NavBtnLink to="/signin">Sign In</NavBtnLink>
-                  </NavBtn>
-              </NavbarContainer>
-            </Nav>
-        </>
-    );
+const Navbar = () => {
+  return (
+    <>
+      <Nav>
+        <NavbarContainer>
+          <NavLogo to="/">Virtual Consultant</NavLogo>
+          <NavMenu>
+            <NavItem>
+              <NavLinks to="/about">About</NavLinks>
+            </NavItem>
+            <NavItem>
+              <NavLinks to="/services">Services</NavLinks>
+            </NavItem>
+          </NavMenu>
+          <NavBtn>
+            <NavBtnLink to="/signin">Sign In</NavBtnLink>
+          </NavBtn>
+        </NavbarContainer>
+      </Nav>
+    </>
+  );
 };
 
-export default Navbar
+export default Navbar;
