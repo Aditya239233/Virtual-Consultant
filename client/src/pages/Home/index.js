@@ -1,5 +1,4 @@
 import React from "react";
-import Video from "../../assets/video.mp4";
 import { useState } from "react";
 import "./index.css";
 import { Button } from "../../components/StyledComponents/ButtonElement";
@@ -21,7 +20,7 @@ const Home = () => {
             autoPlay
             loop
             muted
-            src={Video}
+            src="/assets/video.mp4"
             type="video/mp4"
           />
         </div>
