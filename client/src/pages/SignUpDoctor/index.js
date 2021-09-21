@@ -7,10 +7,11 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import SignUpForm from "../../components/Forms/SignUpForm";
+import SignUpDoctor from "../../components/Forms/SignUpDoctorForm";
 
 const theme = createTheme();
 
-const SignUp = () => {
+const SignUpDoc = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -27,13 +28,13 @@ const SignUp = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign Up as a Patient
+            Sign Up as a Doctor
           </Typography>
-          <SignUpForm />
+          <SignUpDoctor />
         </Box>
       </Container>
     </ThemeProvider>
   );
 };
 
-export default SignUp;
+export default SignUpDoc;

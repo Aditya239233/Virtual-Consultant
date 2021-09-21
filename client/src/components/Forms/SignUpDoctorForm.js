@@ -9,7 +9,7 @@ import Box from "@material-ui/core/Box";
 import { Link as LinkR } from "react-router-dom";
 
 
-const SignUp = () => {
+const SignUpDoctor = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -69,42 +69,22 @@ const SignUp = () => {
                 <TextField
                   required
                   fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="Height"
-                  label="Height(m)"
-                  name="Height"
-                  autoComplete="height"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="Weight"
-                  label="Weight(kg)"
-                  name="Weight"
-                  autoComplete="weight"
+                  name="Re-password"
+                  label="Re-Password"
+                  type="Re-password"
+                  id="Re-password"
+                  autoComplete="Re-new-password"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="Medical History"
-                  label="Medical History"
-                  type="Medical History"
-                  id="Medical History"
-                  autoComplete="Medical History"
+                  name="Medical ID"
+                  label="Medical ID"
+                  type="Medical ID"
+                  id="Medical ID"
+                  autoComplete="ID History"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -120,8 +100,8 @@ const SignUp = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <LinkR variant="body2" to="/signupDoctor">
-                  Want to join as a Doctor instead? Click here.
+                <LinkR variant="body2" to="/signup">
+                  Want to join as a Patient instead? Click here.
                 </LinkR>
               </Grid>
             </Grid>
@@ -129,4 +109,4 @@ const SignUp = () => {
   );
 }
 
-export default SignUp;
+export default SignUpDoctor;

@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Feed from "./pages/Feed";
+import SignUp from "./pages/SignUp";
+import SignUpDoctor from "./pages/SignUpDoctor";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="/" exact component={Home} />
         <Route path="/login" exact component={Login} />
         <Route path="/feed" exact component={Feed} />
+        <Route path="/signup" exact component={SignUp} />
+        <Route path="/signupDoctor" exact component={SignUpDoctor} />
       </Switch>
     </Router>
   );

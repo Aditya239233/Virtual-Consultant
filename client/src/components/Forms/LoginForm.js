@@ -6,6 +6,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
+import { Link as LinkR } from "react-router-dom";
 
 const LoginForm = () => {
   const handleSubmit = (event) => {
@@ -54,9 +55,9 @@ const LoginForm = () => {
           </Link>
         </Grid>
         <Grid item>
-          <Link href="#" variant="body2">
+          <LinkR variant="body2" to="/signup">
             {"Don't have an account? Sign Up"}
-          </Link>
+          </LinkR>
         </Grid>
       </Grid>
     </Box>
