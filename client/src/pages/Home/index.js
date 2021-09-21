@@ -4,6 +4,7 @@ import "./index.css";
 import { Button } from "../../components/StyledComponents/ButtonElement";
 import { MdKeyboardArrowRight, MdArrowForward } from "react-icons/md";
 
+
 const Home = () => {
   const [hover, setHover] = useState(false);
 
