@@ -10,7 +10,7 @@ import LoginForm from "../../components/Forms/LoginForm";
 
 const theme = createTheme();
 
-export default function Login() {
+const Login = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -34,4 +34,6 @@ export default function Login() {
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+export default Login;
