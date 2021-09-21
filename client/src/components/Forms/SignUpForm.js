@@ -69,11 +69,11 @@ const SignUp = () => {
                 <TextField
                   required
                   fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
+                  name="Re-password"
+                  label="Re-Password"
+                  type="Re-password"
+                  id="Re-password"
+                  autoComplete="Re-new-password"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
