@@ -21,6 +21,6 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-app.use('/registerpatient', patient_route);
+app.use('/', patient_route);
 
 app.use('/', doctor_route);

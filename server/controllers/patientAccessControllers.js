@@ -1,17 +1,17 @@
 const patient = require("../model/patient");
 const bcrypt = require("bcrypt");
 
-const patientRegister= async (request, response) => {
+const patientRegister = async (request, response) => {
     console.log(response.statusCode);
-    try{
-        const patientExists = await patient.findOne({ email: request.body.email});
-        if(patientExists) 
-        {
+    try {
+        const patientExists = await patient.findOne({
+            email: request.body.email
+        });
+        if (patientExists) {
             return response.status(409).send('This patient already exists');
         }
 
-    }
-    catch(error){
+    } catch (error) {
         response.status(400).send(error);
     }
     const new_patient = new patient({
@@ -23,7 +23,7 @@ const patientRegister= async (request, response) => {
         age: request.body.age,
         weight: request.body.weight,
         height: request.body.height,
-        bmi: request.body.weight/(request.body.height*request.body.height),
+        bmi: request.body.weight / (request.body.height * request.body.height),
         allergies: request.body.allergies,
         confirm_password: request.body.confirm_password
     });
@@ -46,7 +46,37 @@ const patientRegister= async (request, response) => {
         'statuscode': response.statusCode
     })
 }
-
-module.exports={
-    patientRegister
+const patientLogin = async (request, response) => {
+    try {
+        const patient_doc = await patient.findOne({
+            username: request.body.username
+        });
+        if (patient_doc) {
+            const match = await bcrypt.compare(request.body.password, patient_doc['password']);
+            if (match) {
+                response.json({
+                    'statuscode': response.statusCode,
+                });
+            } else {
+                response.json({
+                    'statuscode': response.statusCode,
+                    'message': 'password incorrect',
+                })
+            }
+        } else {
+            response.json({
+                'statuscode': 400,
+                'message': 'user not found'
+            });
+        }
+    } catch (error) {
+        response.json({
+            'statuscode': response.statusCode
+        });
+        response.status(400).send(error)
+    }
+}
+module.exports = {
+    patientRegister,
+    patientLogin
 }
