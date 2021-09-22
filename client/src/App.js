@@ -12,6 +12,7 @@ function App() {
     <Router>
       <Navbar />
       <Switch>
+        asd
         <Route path="/" exact component={Home} />
         <Route path="/login" exact component={Login} />
         <Route path="/feed" exact component={Feed} />
