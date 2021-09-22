@@ -1,0 +1,48 @@
+name: Continuous Integration
+on: 
+  pull_request:
+    branches: [main]
+
+jobs:
+  frontend:
+    name: Build and Test frontend
+    runs-on: ubuntu-latest
+    defaults:
+        run:
+          working-directory: ./client
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+          with:
+            node-version: '14'
+
+      - name: Install Dependencies
+      run: npm install
+
+      - name: Test
+      run: npm test --watchAll=false
+
+      - name: Build
+      run: npm build
+
+  backend:
+    name: Test backend
+    runs-on: ubuntu-latest
+    defaults:
+        run:
+          working-directory: ./server
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+          with:
+            node-version: '14'
+
+      - name: Install Dependencies
+      run: npm install
+
+      - name: Test
+      run: npm test --watchAll=false
