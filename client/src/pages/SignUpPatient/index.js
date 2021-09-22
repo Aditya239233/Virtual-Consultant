@@ -10,7 +10,7 @@ import SignUpForm from "../../components/Forms/SignUpPatientForm";
 
 const theme = createTheme();
 
-const SignUp = () => {
+const SignUpPatient = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -36,4 +36,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpPatient;
