@@ -14,6 +14,7 @@ function App() {
       <Switch>
         asd
         <Route path="/" exact component={Home} />
+        ads
         <Route path="/login" exact component={Login} />
         <Route path="/feed" exact component={Feed} />
         <Route path="/signup" exact component={SignUpPatient} />
