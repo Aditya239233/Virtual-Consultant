@@ -20,9 +20,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: cd ./client
-      - run: npm i
-      - run: npm test
+      - run: cd ./client && npm i
+      - run: cd ./client && npm test --passWithNoTests
 
   backend:
     name: Test backend
@@ -40,6 +39,5 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: cd ./server
-      - run: npm i
-      - run: npm test
+      - run: cd ./server && npm i
+      - run: cd ./server && npm test --passWithNoTests
