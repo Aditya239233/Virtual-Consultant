@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Feed from "./pages/Feed";
-import SignUp from "./pages/SignUp";
+import SignUp from "./pages/SignUpPatient";
 import SignUpDoctor from "./pages/SignUpDoctor";
 
 function App() {
