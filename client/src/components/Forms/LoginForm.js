@@ -14,7 +14,7 @@ const LoginForm = () => {
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
-      email: data.get("email"),
+      email: data.get("username"),
       password: data.get("password"),
     });
   };
@@ -25,10 +25,10 @@ const LoginForm = () => {
         margin="normal"
         required
         fullWidth
-        id="email"
-        label="Email Address"
-        name="email"
-        autoComplete="email"
+        id="username"
+        label="Username"
+        name="username"
+        autoComplete="username"
         autoFocus
       />
       <TextField
