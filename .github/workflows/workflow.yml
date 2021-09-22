@@ -19,7 +19,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
       - run: cd ./client && npm i
       - run: cd ./client && npm test --passWithNoTests
 
@@ -38,6 +37,5 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
       - run: cd ./server && npm i
       - run: cd ./server && npm test --passWithNoTests
