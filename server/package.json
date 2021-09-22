@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "backend server",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "khush",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "expres": "0.0.5",
+    "express": "^4.17.1",
+    "mocha": "^9.1.1",
+    "mongoose": "^6.0.2",
+    "supertest": "^6.1.6"
+  }
+}
