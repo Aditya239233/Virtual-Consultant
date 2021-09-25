@@ -1,8 +1,8 @@
-const socket = io('/videoroom')
+const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 const myPeer = new Peer(undefined, {
-    host: '/videoroom',
-    port: '3001'
+        host: '/',
+        port: '3001'
 })
 const myVideo = document.createElement('video')
 myVideo.muted = true
@@ -12,17 +12,20 @@ navigator.mediaDevices.getUserMedia({
     audio: true
 }).then(stream => {
     addVideoStream(myVideo, stream)
-
     myPeer.on('call', call => {
+        console.log(stream)
+        console.log("Answering the call")
         call.answer(stream)
         const video = document.createElement('video')
         call.on('stream', userVideoStream => {
+            console.log(stream)
             addVideoStream(video, userVideoStream)
         })
     })
 
     socket.on('user-connected', userId => {
-        connectToNewUser(userId, stream)
+        setTimeout(connectToNewUser,1000,userId,stream)
+        //connectToNewUser(userId, stream)
     })
 })
 
@@ -36,8 +39,10 @@ myPeer.on('open', id => {
 
 function connectToNewUser(userId, stream) {
     const call = myPeer.call(userId, stream)
+    console.log("sending info to client 2", userId, stream)
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
+        console.log(stream)
         addVideoStream(video, userVideoStream)
     })
     call.on('close', () => {

@@ -1,4 +1,5 @@
 const patient = require("../model/patient");
+const chat = require('../model/chat')
 const bcrypt = require("bcrypt");
 const {
     v4: uuidV4
@@ -85,27 +86,44 @@ const patientLogin = async (request, response) => {
 }
 const patientRoom = (request, response) => {
     response.render('videoroom', {
-        roomId: request.params.room
+        roomId: request.params.videoroom
     })
 }
 const patientRedirect = (request, response) => {
     response.redirect(`/${uuidV4()}`)
 }
 
-function connect_socket(socket) {
-    socket.on('join-room', (roomId, userId) => {
-        socket.join(roomId)
-        socket.to(roomId).broadcast.emit('user-connected', userId)
+const newChat= (request,response)=>{
+    const new_chat = new chat({
+            patientUsername:request.body.patientUsername,
+            doctorUsername:request.body.doctorUsername,
+            text_messages:[{
+                text: request.body.text,
+                timestamp: request.body.timestamp,
+                sender:request.body.sender
+            }
+            ]
+       
+    });
+    new_chat
+            .save()
+            .then((data) => {
+                console.log("successfully created a new patient");
+                response.json({
+                    'statuscode': response.statusCode,
+                });
+            })
+            .catch((error) => {
+                console.log("error", error);
+            });
 
-        socket.on('disconnect', () => {
-            socket.to(roomId).broadcast.emit('user-disconnected', userId)
-        })
-    })
+    
+
 }
 module.exports = {
     patientRegister,
     patientLogin,
     patientRoom,
     patientRedirect,
-    connect_socket
+    newChat
 }
