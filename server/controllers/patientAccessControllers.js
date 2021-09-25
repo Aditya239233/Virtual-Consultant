@@ -1,5 +1,12 @@
 const patient = require("../model/patient");
 const bcrypt = require("bcrypt");
+const {
+    v4: uuidV4
+} = require('uuid');
+const {
+    request,
+    response
+} = require("express");
 
 const patientRegister = async (request, response) => {
     console.log(response.statusCode);
@@ -76,7 +83,29 @@ const patientLogin = async (request, response) => {
         response.status(400).send(error)
     }
 }
+const patientRoom = (request, response) => {
+    response.render('videoroom', {
+        roomId: request.params.room
+    })
+}
+const patientRedirect = (request, response) => {
+    response.redirect(`/${uuidV4()}`)
+}
+
+function connect_socket(socket) {
+    socket.on('join-room', (roomId, userId) => {
+        socket.join(roomId)
+        socket.to(roomId).broadcast.emit('user-connected', userId)
+
+        socket.on('disconnect', () => {
+            socket.to(roomId).broadcast.emit('user-disconnected', userId)
+        })
+    })
+}
 module.exports = {
     patientRegister,
-    patientLogin
+    patientLogin,
+    patientRoom,
+    patientRedirect,
+    connect_socket
 }
