@@ -4,7 +4,6 @@ import "./index.css";
 import { Button } from "../../components/StyledComponents/ButtonElement";
 import { MdKeyboardArrowRight, MdArrowForward } from "react-icons/md";
 
-
 const Home = () => {
   const [hover, setHover] = useState(false);
 
@@ -26,7 +25,7 @@ const Home = () => {
           />
         </div>
         <div class="body">
-          <h1 class="header">Consultantions Made Easy</h1>
+          <h1 class="header">Consultations Made Easy</h1>
           <p class="paragraph">
             Sign up for a new account now for easy consultations
           </p>
