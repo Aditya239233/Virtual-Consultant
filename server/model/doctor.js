@@ -30,6 +30,10 @@ const doctorSchema = mongoose.Schema({
     confirm_password: {
         type: String,
         require: true
+    },
+    followers: {
+        type: Array,
+        default: []
     }
 });
 module.exports = mongoose.model("doctor", doctorSchema);

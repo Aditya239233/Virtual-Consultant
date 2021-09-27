@@ -1,4 +1,5 @@
 const patient = require("../model/patient");
+//const doctor = require("../models/doctor");
 const bcrypt = require("bcrypt");
 
 const patientRegister = async (request, response) => {
@@ -76,7 +77,42 @@ const patientLogin = async (request, response) => {
         response.status(400).send(error)
     }
 }
+
+/*const followDoctor = async (request,response) => {
+    try{
+        const Doctor = await doctor.findOne({username: request.params.username});
+        const Patient = await patient.findOne({username: request.body.username});
+        if(!Doctor.followers.includes(request.body.username)){
+            await Doctor.updateOne({ $push: { followers: request.body.username}});
+            await Patient.updateOne({ $push: { following: request.params.username}});
+            response.status(200).json("Doctor has been followed");
+        }else{
+            response.status(403).json("You already follow thise doctor");
+        }
+
+    }catch(err){
+        response.status(500).json(err)
+    }
+}
+
+const unfollowDoctor = async (request,response) => {
+    try{
+        const Doctor = await doctor.findOne({username: request.params.username});
+        const Patient = await patient.findOne({username: request.body.username});
+        if(Doctor.followers.includes(request.body.username)){
+            await Doctor.updateOne({ $pull: { followers: request.body.username}});
+            await Patient.updateOne({ $pull: { following: request.params.username}});
+            response.status(200).json("Doctor has been unfollowed");
+        }else{
+            response.status(403).json("You don't follow thise doctor");
+        }
+
+    }catch(err){
+        response.status(500).json(err)
+    }
+}*/
 module.exports = {
     patientRegister,
     patientLogin
+    
 }
