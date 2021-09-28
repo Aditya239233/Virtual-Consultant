@@ -93,31 +93,30 @@ const patientRedirect = (request, response) => {
     response.redirect(`/${uuidV4()}`)
 }
 
-const newChat= (request,response)=>{
+const newChat = (request, response) => {
     const new_chat = new chat({
-            patientUsername:request.body.patientUsername,
-            doctorUsername:request.body.doctorUsername,
-            text_messages:[{
-                text: request.body.text,
-                timestamp: request.body.timestamp,
-                sender:request.body.sender
-            }
-            ]
-       
+        patientUsername: request.body.patientUsername,
+        doctorUsername: request.body.doctorUsername,
+        text_messages: [{
+            text: request.body.text,
+            timestamp: request.body.timestamp,
+            sender: request.body.sender
+        }]
+
     });
     new_chat
-            .save()
-            .then((data) => {
-                console.log("successfully created a new patient");
-                response.json({
-                    'statuscode': response.statusCode,
-                });
-            })
-            .catch((error) => {
-                console.log("error", error);
+        .save()
+        .then((data) => {
+            console.log("successfully created a new patient");
+            response.json({
+                'statuscode': response.statusCode,
             });
+        })
+        .catch((error) => {
+            console.log("error", error);
+        });
 
-    
+
 
 }
 module.exports = {

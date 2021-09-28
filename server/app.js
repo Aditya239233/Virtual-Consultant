@@ -1,4 +1,3 @@
-
 var express = require('express');
 const bodyParser = require('body-parser');
 const patient_route = require('./routes/patientRoute.js');
@@ -30,7 +29,10 @@ io.on('connection', socket => {
         console.log(roomId, userId)
         socket.join(roomId)
         socket.broadcast.to(roomId).emit('user-connected', userId)
-
+        socket.on('message', (message) => {
+            //send message to the same room
+            io.to(roomId).emit('createMessage', message)
+        });
         socket.on('disconnect', () => {
             socket.broadcast.to(roomId).emit('user-disconnected', userId)
         })
@@ -44,4 +46,3 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://khushk21:Wwerocks21@cluster0.g2oxr.mongodb.net/VirtualConsultantDatabase?retryWrites=true&w=majority', () => {
     console.log("connected to mongodb successfully")
 })
-
