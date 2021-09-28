@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Feed from "./pages/Feed";
 import SignUp from "./pages/SignUp";
 import SignUpDoctor from "./pages/SignUpDoctor";
+import Consult from "./pages/Consult";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/feed" exact component={Feed} />
         <Route path="/signup" exact component={SignUp} />
         <Route path="/signupDoctor" exact component={SignUpDoctor} />
+        <Route path="/consult" exact component={Consult} />
       </Switch>
     </Router>
   );

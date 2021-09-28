@@ -50,9 +50,9 @@ const LoginForm = () => {
       </Button>
       <Grid container>
         <Grid item xs>
-          <Link href="#" variant="body2">
+          <LinkR variant="body2" to="/consult">
             Forgot password?
-          </Link>
+          </LinkR>
         </Grid>
         <Grid item>
           <LinkR variant="body2" to="/signup">
