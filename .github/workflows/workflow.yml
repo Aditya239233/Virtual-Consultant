@@ -1,5 +1,5 @@
 name: Continuous Integration
-on: 
+on:
   pull_request:
     branches: [main]
 
@@ -8,41 +8,34 @@ jobs:
     name: Build and Test frontend
     runs-on: ubuntu-latest
     defaults:
-        run:
-          working-directory: ./client
+      run:
+        working-directory: ./client
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
     steps:
-      - name: Checkout
       - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v2
-          with:
-            node-version: '14'
-
-      - name: Install Dependencies
-      run: npm install
-
-      - name: Test
-      run: npm test --watchAll=false
-
-      - name: Build
-      run: npm build
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: cd ./client && npm i
+      - run: cd ./client && npm test --passWithNoTests
 
   backend:
     name: Test backend
     runs-on: ubuntu-latest
     defaults:
-        run:
-          working-directory: ./server
+      run:
+        working-directory: ./server
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
     steps:
-      - name: Checkout
       - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v2
-          with:
-            node-version: '14'
-
-      - name: Install Dependencies
-      run: npm install
-
-      - name: Test
-      run: npm test --watchAll=false
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: cd ./server && npm i
+      - run: cd ./server && npm test --passWithNoTests

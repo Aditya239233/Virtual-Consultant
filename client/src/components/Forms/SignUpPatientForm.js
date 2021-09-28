@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { Link as LinkR } from "react-router-dom";
 
-const SignUpDoctor = () => {
+const SignUp = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -72,15 +72,35 @@ const SignUpDoctor = () => {
             autoComplete="Re-new-password"
           />
         </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            fullWidth
+            id="Height"
+            label="Height(m)"
+            name="Height"
+            autoComplete="height"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            fullWidth
+            id="Weight"
+            label="Weight(kg)"
+            name="Weight"
+            autoComplete="weight"
+          />
+        </Grid>
         <Grid item xs={12}>
           <TextField
             required
             fullWidth
-            name="Medical ID"
-            label="Medical ID"
-            type="Medical ID"
-            id="Medical ID"
-            autoComplete="ID History"
+            name="Medical History"
+            label="Medical History"
+            type="Medical History"
+            id="Medical History"
+            autoComplete="Medical History"
           />
         </Grid>
         <Grid item xs={12}></Grid>
@@ -90,8 +110,8 @@ const SignUpDoctor = () => {
       </Button>
       <Grid container justifyContent="flex-end">
         <Grid item>
-          <LinkR variant="body2" to="/signup">
-            Want to join as a Patient instead? Click here.
+          <LinkR variant="body2" to="/signupDoctor">
+            Want to join as a Doctor instead? Click here.
           </LinkR>
         </Grid>
       </Grid>
@@ -99,4 +119,4 @@ const SignUpDoctor = () => {
   );
 };
 
-export default SignUpDoctor;
+export default SignUp;

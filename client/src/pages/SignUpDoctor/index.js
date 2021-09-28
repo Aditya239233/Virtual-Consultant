@@ -6,7 +6,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
-import SignUpForm from "../../components/Forms/SignUpForm";
 import SignUpDoctor from "../../components/Forms/SignUpDoctorForm";
 
 const theme = createTheme();
