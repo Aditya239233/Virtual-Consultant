@@ -115,14 +115,51 @@ const newChat = (request, response) => {
         .catch((error) => {
             console.log("error", error);
         });
+}
 
-
-
+const retrieveConversation = async (request, response) => {
+    const chat_doc = await chat.find({
+        patientUsername: request.body.patientUsername,
+        doctorUsername: request.body.doctorUsername
+    })
+    if (chat_doc) {
+        console.log(chat_doc)
+    }
+    response.json({
+        'status': response.statusCode
+    })
+}
+const viewPatientProfile = async (request, response) => {
+    const patient_doc = await patient.findOne({
+        username: request.body.username
+    })
+    if (patient_doc) {
+        response.json({
+            "status": response.statusCode,
+            "first_name": patient_doc['first_name'],
+            "last_name": patient_doc['last_name'],
+            "username": patient_doc['username'],
+            "email": patient_doc['email'],
+            "age": patient_doc['age'],
+            "weight": patient_doc['weight'],
+            "height": patient_doc['height'],
+            "bmi": patient_doc['bmi'],
+            "allergies": patient_doc['allergies'],
+        });
+    } else {
+        response.json({
+            "status": response.statusCode,
+            "message": "user does not exist"
+        })
+    }
+    console.log(patient_doc)
 }
 module.exports = {
     patientRegister,
     patientLogin,
     patientRoom,
     patientRedirect,
-    newChat
+    newChat,
+    retrieveConversation,
+    viewPatientProfile
 }

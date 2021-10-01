@@ -8,4 +8,6 @@ router.get("/loginpatient", patientAccess.patientLogin);
 router.get("/videoroom", patientAccess.patientRedirect);
 router.get('/:videoroom', patientAccess.patientRoom);
 router.post('/chat', patientAccess.newChat);
+router.get('/retrieveConversation', patientAccess.retrieveConversation);
+router.get('/viewpatientprofile', patientAccess.viewPatientProfile);
 module.exports = router;

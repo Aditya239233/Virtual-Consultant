@@ -92,7 +92,31 @@ const doctorLogin = async (request, response) => {
         response.status(400).send(error);
     }
 }
+
+const viewDoctorProfile = async (request, response) => {
+    const doctor_doc = await patient.findOne({
+        username: request.body.username
+    })
+    if (doctor_doc) {
+        response.json({
+            "status": response.statusCode,
+            "first_name": doctor_doc['first_name'],
+            "last_name": doctor_doc['last_name'],
+            "username": doctor_doc['username'],
+            "email": doctor_doc['email'],
+            "medical_id": doctor_doc['medical_id']
+        });
+    } else {
+        response.json({
+            "status": response.statusCode,
+            "message": "user does not exist"
+        })
+    }
+    console.log(doctor_doc)
+}
+
 module.exports = {
     doctorRegister,
-    doctorLogin
+    doctorLogin,
+    viewDoctorProfile
 }
