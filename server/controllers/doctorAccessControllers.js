@@ -1,7 +1,12 @@
 const bcrypt = require("bcrypt");
 const doctor = require("../model/doctor");
 const consultationRequest=require('../model/consultationRequest');
+var ObjectId = require('mongodb').ObjectId;
 const fs = require("fs");
+const {
+    v4: uuidV4
+} = require('uuid');
+
 const doctorRegister = async (request, response) => {
     try {
         const doctorExists = await doctor.findOne({
@@ -157,9 +162,19 @@ const viewNotifications = async (request,response)=>{
     })
 }
 
+const acceptConsultationRequest= async (request,response) => {
+    const accepted_request= await consultationRequest.findOneAndDelete({
+        _id:ObjectId(request.body.id)
+    })
+    console.log(accepted_request)
+    response.redirect(`/${uuidV4()}`)
+
+}
+
 module.exports = {
     doctorRegister,
     doctorLogin,
     viewDoctorProfile,
-    viewNotifications
+    viewNotifications,
+    acceptConsultationRequest
 }

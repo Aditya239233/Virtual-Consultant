@@ -7,4 +7,5 @@ router.post("/registerdoctor", doctorAccess.doctorRegister);
 router.get("/logindoctor", doctorAccess.doctorLogin);
 router.get("/viewdoctorprofile", doctorAccess.viewDoctorProfile);
 router.get("/viewnotifications",doctorAccess.viewNotifications);
+router.delete("/acceptconsultationrequest",doctorAccess.acceptConsultationRequest);
 module.exports = router;
