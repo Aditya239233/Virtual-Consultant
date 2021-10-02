@@ -1,0 +1,44 @@
+.message{
+    display: flex;
+    border-radius: 20px;
+    border-width: 1px;
+    border-style: solid;
+    background-color: rgba(201, 55, 55, 0);
+    flex-direction: column;
+    width: 60%;
+    margin: 10px;
+    max-width: 60%;
+    max-height: fit-content;
+    justify-content: right;
+
+}
+
+.messageTop{
+    display: flex;
+    font-size: small;
+    font-weight: 200;
+    width: 100%;
+    padding: 5px;
+    flex-direction: column;
+}
+.sender{
+    font-size: small;
+    font-weight: 400;
+    width: 100%;
+    border-bottom: 1px;
+    border-bottom-style: solid;
+    padding:5px;
+}
+
+.messageDateTime{
+    align-items: flex-end;
+    
+    flex-direction: row;
+    padding: 5px;
+    margin-left: 520px;
+    font-size: xx-small;
+    color: dimgrey;
+}
+.message.own{
+    justify-content: right;
+}
