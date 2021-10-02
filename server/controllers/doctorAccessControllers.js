@@ -75,10 +75,10 @@ const doctorLogin = async (request, response) => {
     console.log(request.body)
     try {
         const doctor_doc = await doctor.findOne({
-            'username': request.body.username
+            'username': request.query["username"]
         });
         if (doctor_doc) {
-            const match = await bcrypt.compare(request.body.password, doctor_doc['password']);
+            const match = await bcrypt.compare(request.query["password"], doctor_doc['password']);
             if (match) {
                 response.json({
                     'statuscode': response.statusCode
@@ -101,8 +101,8 @@ const doctorLogin = async (request, response) => {
 }
 
 const viewDoctorProfile = async (request, response) => {
-    const doctor_doc = await patient.findOne({
-        username: request.body.username
+    const doctor_doc = await doctor.findOne({
+        username: request.query["username"]
     })
     if (doctor_doc) {
         response.json({
@@ -124,7 +124,7 @@ const viewDoctorProfile = async (request, response) => {
 
 const viewNotifications = async (request,response)=>{
     const consultation_requests=await consultationRequest.find({
-        type:request.body.type
+        type:request.query["type"]
     })
     let filtered_requests=[]
     for (let i=0;i<consultation_requests.length;i++)
