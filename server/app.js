@@ -2,7 +2,7 @@ var express = require('express');
 const bodyParser = require('body-parser');
 const patient_route = require('./routes/patientRoute.js');
 const doctor_route = require('./routes/doctorRoute.js');
-
+const chat_route=require('./routes/chatRoute.js')
 
 const router = express.Router();
 const {
@@ -21,9 +21,11 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-app.use('/', patient_route);
-
 app.use('/', doctor_route);
+
+app.use('/', chat_route);
+
+app.use('/', patient_route);
 io.on('connection', socket => {
     socket.on('join-room', (roomId, userId) => {
         console.log(roomId, userId)
