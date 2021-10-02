@@ -57,10 +57,10 @@ const patientRegister = async (request, response) => {
 const patientLogin = async (request, response) => {
     try {
         const patient_doc = await patient.findOne({
-            username: request.body.username
+            username: request.query["username"]
         });
         if (patient_doc) {
-            const match = await bcrypt.compare(request.body.password, patient_doc['password']);
+            const match = await bcrypt.compare(request.query["password"], patient_doc['password']);
             if (match) {
                 response.json({
                     'statuscode': response.statusCode,
@@ -96,7 +96,7 @@ const patientRedirect = (request, response) => {
 
 const viewPatientProfile = async (request, response) => {
     const patient_doc = await patient.findOne({
-        username: request.body.username
+        username: request.query["username"]
     })
     if (patient_doc) {
         response.json({
