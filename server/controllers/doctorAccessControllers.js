@@ -15,7 +15,7 @@ const doctorRegister = async (request, response) => {
     }
     var doctorValid = false;
     try {
-        const data = fs.readFileSync('/Users/khush/Desktop/Virtual-Consultant/scraping/server/doctors.txt', 'utf-8');
+        const data = fs.readFileSync('C:\\Users\\Aratrika\\Desktop\\NTU COURSES_PROJECTS_HACKS\\NTU YEAR 3, SEM 1\\ASE\\Virtual-Consultant\\server\\scraping\\doctors.txt', 'utf-8');
         const lines = data.split(/\r?\n/);
         lines.forEach((line) => {
             var temp_name = request.body.first_name + " " + request.body.last_name
@@ -35,7 +35,8 @@ const doctorRegister = async (request, response) => {
             email: request.body.email,
             password: request.body.password,
             username: request.body.username,
-            confirm_password: request.body.confirm_password
+            confirm_password: request.body.confirm_password,
+            specialization:request.body.specialization
         });
 
         bcrypt.hash(new_doctor.password, 10, function (err, hash) {

@@ -30,6 +30,10 @@ const doctorSchema = mongoose.Schema({
     confirm_password: {
         type: String,
         require: true
+    },
+    specialization:{
+        type:String,
+        required:true
     }
 });
 module.exports = mongoose.model("doctor", doctorSchema);
