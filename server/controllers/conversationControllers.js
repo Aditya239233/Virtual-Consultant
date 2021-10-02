@@ -52,8 +52,8 @@ const newChat = async (request, response) => {
 
 const retrieveConversation = async (request, response) => {
     const chat_doc = await chat.find({
-        patientUsername: request.body.patientUsername,
-        doctorUsername: request.body.doctorUsername
+        patientUsername: request.query["patientUsername"],
+        doctorUsername: request.query["doctorUsername"]
     })
     if(chat_doc.length>0){
         text_messages=chat_doc[0].text_messages
@@ -76,7 +76,7 @@ const retrieveConversation = async (request, response) => {
 
 const retrieveAllConversationPartners= async (request, response) => {
     const chat_patient=await chat.find({
-        patientUsername: request.body.username
+        patientUsername: request.query["username"]
     })
     chat_partners=[]
     if(chat_patient.length>0){
@@ -93,7 +93,7 @@ const retrieveAllConversationPartners= async (request, response) => {
     }
     else{
     const chat_doctor=await chat.find({
-        doctorUsername: request.body.username
+        doctorUsername: request.query["username"]
     })
     chat_partners=[]
     if(chat_doctor.length>0){
