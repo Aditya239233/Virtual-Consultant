@@ -6,4 +6,5 @@ const router = express.Router();
 router.post("/registerdoctor", doctorAccess.doctorRegister);
 router.get("/logindoctor", doctorAccess.doctorLogin);
 router.get("/viewdoctorprofile", doctorAccess.viewDoctorProfile);
+router.get("/viewnotifications",doctorAccess.viewNotifications);
 module.exports = router;

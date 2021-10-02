@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const doctor = require("../model/doctor");
+const consultationRequest=require('../model/consultationRequest');
 const fs = require("fs");
 const doctorRegister = async (request, response) => {
     try {
@@ -116,8 +117,49 @@ const viewDoctorProfile = async (request, response) => {
     console.log(doctor_doc)
 }
 
+const viewNotifications = async (request,response)=>{
+    const consultation_requests=await consultationRequest.find({
+        type:request.body.type
+    })
+    let filtered_requests=[]
+    for (let i=0;i<consultation_requests.length;i++)
+    {
+        severity=consultation_requests[i].severity_level
+        timestamp=consultation_requests[i].timestamp
+        let diffMilli=Date.now()-timestamp
+        var diffMins = Math.round(((diffMilli % 86400000) % 3600000) / 60000);
+        console.log(diffMins)
+        if(severity=='High')
+        {
+            if(diffMins<10)
+            {
+                filtered_requests.push(consultation_requests[i])
+            }
+        }
+        if(severity=='Medium')
+        {
+            if(diffMins<20)
+            {
+                filtered_requests.push(consultation_requests[i])
+            }
+        }
+        if(severity=='Low')
+        {
+            if(diffMins<30)
+            {
+                filtered_requests.push(consultation_requests[i])
+            }
+        }
+    }
+    response.json({
+        'status':response.statusCode,
+        'consultation_requests':filtered_requests
+    })
+}
+
 module.exports = {
     doctorRegister,
     doctorLogin,
-    viewDoctorProfile
+    viewDoctorProfile,
+    viewNotifications
 }
