@@ -146,12 +146,23 @@ const retrieveConversation = async (request, response) => {
         patientUsername: request.body.patientUsername,
         doctorUsername: request.body.doctorUsername
     })
-    if (chat_doc) {
-        console.log(chat_doc)
+    if(chat_doc.length>0){
+        text_messages=chat_doc[0].text_messages
+        console.log(text_messages)
+        text_messages=text_messages.sort((a, b) => (a.timestamp) > new Date(b.timestamp) ? 1 : -1)
+        console.log(text_messages)
+        response.json({
+            'status': response.statusCode,
+            'chat_messages':text_messages
+        })
     }
-    response.json({
-        'status': response.statusCode
-    })
+    else
+    {
+        response.json({
+            'status': response.statusCode
+        })
+    }
+    
 }
 const viewPatientProfile = async (request, response) => {
     const patient_doc = await patient.findOne({
