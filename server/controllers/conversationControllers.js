@@ -1,4 +1,6 @@
 const chat=require('../model/chat')
+const doctor = require('../model/doctor')
+const patient = require("../model/patient");
 
 const newChat = async (request, response) => {
     const chat_exists = await chat.find({
@@ -72,7 +74,47 @@ const retrieveConversation = async (request, response) => {
     
 }
 
+const retrieveAllConversationPartners= async (request, response) => {
+    const chat_patient=await chat.find({
+        patientUsername: request.body.username
+    })
+    chat_partners=[]
+    if(chat_patient.length>0){
+        // console.log("Its a patient")
+        for(let i = 0; i < chat_patient.length; i++){ 
+            console.log(chat_patient[i].doctorUsername)
+            chat_partners.push(chat_patient[i].doctorUsername)
+    }
+    console.log(chat_partners)
+    response.json({
+        'status':response.statusCode,
+        'chat_partners':chat_partners
+    })
+    }
+    else{
+    const chat_doctor=await chat.find({
+        doctorUsername: request.body.username
+    })
+    chat_partners=[]
+    if(chat_doctor.length>0){
+        for(let i = 0; i < chat_doctor.length; i++){ 
+            console.log(chat_doctor[i].patientUsername)
+            chat_partners.push(chat_doctor[i].patientUsername)
+    }
+    
+    console.log(chat_partners)
+    response.json({
+        'status':response.statusCode,
+        'chat_partners':chat_partners
+    })
+}
+    
+}
+    
+}
+
 module.exports={
     newChat,
-    retrieveConversation
+    retrieveConversation,
+    retrieveAllConversationPartners
 }
