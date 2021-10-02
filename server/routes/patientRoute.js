@@ -6,7 +6,7 @@ const router = express.Router();
 router.post("/registerpatient", patientAccess.patientRegister);
 router.get("/loginpatient", patientAccess.patientLogin);
 router.get("/videoroom", patientAccess.patientRedirect);
-
+router.post("/sendconsultationrequest", patientAccess.sendConsultationRequest)
 router.get('/viewpatientprofile', patientAccess.viewPatientProfile);
 router.get('/:videoroom', patientAccess.patientRoom);
 

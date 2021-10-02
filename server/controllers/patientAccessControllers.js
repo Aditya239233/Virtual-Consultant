@@ -1,4 +1,5 @@
 const patient = require("../model/patient");
+const consultationRequest=require('../model/consultationRequest');
 const bcrypt = require("bcrypt");
 const {
     v4: uuidV4
@@ -118,10 +119,39 @@ const viewPatientProfile = async (request, response) => {
     }
     console.log(patient_doc)
 }
+
+const sendConsultationRequest= (request,response)=>{
+    const new_consultation = new consultationRequest({
+        type:request.body.type,
+        severity_level:request.body.severity_level,
+        text:request.body.text,
+        sender:request.body.sender,
+        acceptor:request.body.acceptor,
+        timestamp:request.body.timestamp
+    });
+    new_consultation
+    .save()
+    .then((data) => {
+        console.log("successfully created a new consultation request");
+        response.json({
+            'statuscode': response.statusCode,
+            'data': data
+            })
+            
+    })
+    .catch((error) => {
+        console.log("error", error);
+        response.json({
+            'statuscode': response.statusCode
+            })
+    });
+
+}
 module.exports = {
     patientRegister,
     patientLogin,
     patientRoom,
     patientRedirect,
-    viewPatientProfile
+    viewPatientProfile,
+    sendConsultationRequest
 }
