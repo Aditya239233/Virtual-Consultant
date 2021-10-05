@@ -31,9 +31,9 @@ const doctorSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    followers: {
-        type: Array,
-        default: []
+    specialization:{
+        type:String,
+        required:true
     }
 });
 module.exports = mongoose.model("doctor", doctorSchema);

@@ -40,10 +40,6 @@ const patientSchema = mongoose.Schema({
     confirm_password: {
         type: String,
         required: true
-    },
-    following: {
-        type: Array,
-        default: []
     }
 });
 module.exports = mongoose.model('patient', patientSchema);

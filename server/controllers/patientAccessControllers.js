@@ -1,6 +1,13 @@
 const patient = require("../model/patient");
-//const doctor = require("../models/doctor");
+const consultationRequest=require('../model/consultationRequest');
 const bcrypt = require("bcrypt");
+const {
+    v4: uuidV4
+} = require('uuid');
+const {
+    request,
+    response
+} = require("express");
 
 const patientRegister = async (request, response) => {
     console.log(response.statusCode);
@@ -50,10 +57,10 @@ const patientRegister = async (request, response) => {
 const patientLogin = async (request, response) => {
     try {
         const patient_doc = await patient.findOne({
-            username: request.body.username
+            username: request.query["username"]
         });
         if (patient_doc) {
-            const match = await bcrypt.compare(request.body.password, patient_doc['password']);
+            const match = await bcrypt.compare(request.query["password"], patient_doc['password']);
             if (match) {
                 response.json({
                     'statuscode': response.statusCode,
@@ -77,42 +84,74 @@ const patientLogin = async (request, response) => {
         response.status(400).send(error)
     }
 }
-
-/*const followDoctor = async (request,response) => {
-    try{
-        const Doctor = await doctor.findOne({username: request.params.username});
-        const Patient = await patient.findOne({username: request.body.username});
-        if(!Doctor.followers.includes(request.body.username)){
-            await Doctor.updateOne({ $push: { followers: request.body.username}});
-            await Patient.updateOne({ $push: { following: request.params.username}});
-            response.status(200).json("Doctor has been followed");
-        }else{
-            response.status(403).json("You already follow thise doctor");
-        }
-
-    }catch(err){
-        response.status(500).json(err)
-    }
+const patientRoom = (request, response) => {
+    response.render('videoroom', {
+        roomId: request.params.videoroom
+    })
+}
+const patientRedirect = (request, response) => {
+    response.redirect(`/${uuidV4()}`)
 }
 
-const unfollowDoctor = async (request,response) => {
-    try{
-        const Doctor = await doctor.findOne({username: request.params.username});
-        const Patient = await patient.findOne({username: request.body.username});
-        if(Doctor.followers.includes(request.body.username)){
-            await Doctor.updateOne({ $pull: { followers: request.body.username}});
-            await Patient.updateOne({ $pull: { following: request.params.username}});
-            response.status(200).json("Doctor has been unfollowed");
-        }else{
-            response.status(403).json("You don't follow thise doctor");
-        }
 
-    }catch(err){
-        response.status(500).json(err)
+const viewPatientProfile = async (request, response) => {
+    const patient_doc = await patient.findOne({
+        username: request.query["username"]
+    })
+    if (patient_doc) {
+        response.json({
+            "status": response.statusCode,
+            "first_name": patient_doc['first_name'],
+            "last_name": patient_doc['last_name'],
+            "username": patient_doc['username'],
+            "email": patient_doc['email'],
+            "age": patient_doc['age'],
+            "weight": patient_doc['weight'],
+            "height": patient_doc['height'],
+            "bmi": patient_doc['bmi'],
+            "allergies": patient_doc['allergies'],
+        });
+    } else {
+        response.json({
+            "status": response.statusCode,
+            "message": "user does not exist"
+        })
     }
-}*/
+    console.log(patient_doc)
+}
+
+const sendConsultationRequest= (request,response)=>{
+    const new_consultation = new consultationRequest({
+        type:request.body.type,
+        severity_level:request.body.severity_level,
+        text:request.body.text,
+        sender:request.body.sender,
+        acceptor:request.body.acceptor,
+        timestamp:request.body.timestamp
+    });
+    new_consultation
+    .save()
+    .then((data) => {
+        console.log("successfully created a new consultation request");
+        response.json({
+            'statuscode': response.statusCode,
+            'data': data
+            })
+            
+    })
+    .catch((error) => {
+        console.log("error", error);
+        response.json({
+            'statuscode': response.statusCode
+            })
+    });
+
+}
 module.exports = {
     patientRegister,
-    patientLogin
-    
+    patientLogin,
+    patientRoom,
+    patientRedirect,
+    viewPatientProfile,
+    sendConsultationRequest
 }
