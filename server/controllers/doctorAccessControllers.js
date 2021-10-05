@@ -15,7 +15,7 @@ const doctorRegister = async (request, response) => {
     }
     var doctorValid = false;
     try {
-        const data = fs.readFileSync('/Users/khush/Desktop/Virtual-Consultant/scraping/server/doctors.txt', 'utf-8');
+        const data = fs.readFileSync('C:\\Users\\user\\CZ3002\\Virtual-Consultant\\server\\scraping\\doctors.txt', 'utf-8');
         const lines = data.split(/\r?\n/);
         lines.forEach((line) => {
             var temp_name = request.body.first_name + " " + request.body.last_name

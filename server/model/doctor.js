@@ -21,15 +21,15 @@ const doctorSchema = mongoose.Schema({
     },
     first_name: {
         type: String,
-        require: true,
+        required: true,
     },
     last_name: {
         type: String,
-        require: true,
+        required: true,
     },
     confirm_password: {
         type: String,
-        require: true
+        required: true
     },
     followers: {
         type: Array,

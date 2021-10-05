@@ -4,10 +4,10 @@ const postAccess = require('../controllers/postAccessControllers')
 const router = express.Router();
 
 router.post("/createpost", postAccess.createPost);
-//router.put("/:id", postAccess.updatePost);
+router.put("/editpost", postAccess.updatePost);
 router.delete("/deletepost", postAccess.deletePost);
-//router.put("/:id/like", postAccess.likePost);
-//router.get("/timeline", postAccess.timelinePostPatient);
-//router.get("/timeline", postAccess.timelinePostDoctor)
+router.put("/likepost", postAccess.likePost);
+router.get("/patienttimeline", postAccess.timelinePostPatient);
+router.get("/doctortimeline", postAccess.timelinePostDoctor)
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const patient = require("../model/patient");
 //const doctor = require("../models/doctor");
 const bcrypt = require("bcrypt");
+const doctor = require("../model/doctor");
 
 const patientRegister = async (request, response) => {
     console.log(response.statusCode);
@@ -78,30 +79,33 @@ const patientLogin = async (request, response) => {
     }
 }
 
-/*const followDoctor = async (request,response) => {
+const followDoctor = async (request,response) => {
     try{
-        const Doctor = await doctor.findOne({username: request.params.username});
-        const Patient = await patient.findOne({username: request.body.username});
-        if(!Doctor.followers.includes(request.body.username)){
-            await Doctor.updateOne({ $push: { followers: request.body.username}});
-            await Patient.updateOne({ $push: { following: request.params.username}});
-            response.status(200).json("Doctor has been followed");
-        }else{
-            response.status(403).json("You already follow thise doctor");
+        const doc = await doctor.findOne({username: request.body.doctor_username});
+        const pat = await patient.findOne({username: request.body.patient_username});
+        
+        if(!doc.followers.includes(request.body.patient_username)){
+            await doc.updateOne({$push: { followers: request.body.patient_username}});
+            await pat.updateOne({$push: { following: request.body.doctor_username}});
+            response.status(200).json("Following");
+        }else {
+         await doc.updateOne({$pull: {followers: request.body.patient_username}});
+         await pat.updateOne({$pull: { following: request.body.doctor_username}});
+         response.status(200).json("Unfollowed");
         }
-
+ 
     }catch(err){
-        response.status(500).json(err)
+        response.status(500).json(err);
     }
 }
 
 const unfollowDoctor = async (request,response) => {
     try{
-        const Doctor = await doctor.findOne({username: request.params.username});
-        const Patient = await patient.findOne({username: request.body.username});
-        if(Doctor.followers.includes(request.body.username)){
-            await Doctor.updateOne({ $pull: { followers: request.body.username}});
-            await Patient.updateOne({ $pull: { following: request.params.username}});
+        const Doctor = await doctor.findOne({username: request.body.doctor_username});
+        const Patient = await patient.findOne({username: request.body.patient_username});
+        if(Doctor.followers.includes(request.body.patient_username)){
+            await Doctor.updateOne({ $pull: { followers: request.body.patient_username}});
+            await Patient.updateOne({ $pull: { following: request.body.doctor_username}});
             response.status(200).json("Doctor has been unfollowed");
         }else{
             response.status(403).json("You don't follow thise doctor");
@@ -110,9 +114,10 @@ const unfollowDoctor = async (request,response) => {
     }catch(err){
         response.status(500).json(err)
     }
-}*/
+}
 module.exports = {
     patientRegister,
-    patientLogin
-    
+    patientLogin,
+    followDoctor,
+    unfollowDoctor   
 }

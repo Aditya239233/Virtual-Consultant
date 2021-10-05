@@ -2,6 +2,7 @@ var express = require('express');
 const bodyParser = require('body-parser');
 const patient_route = require('./routes/patientRoute.js');
 const doctor_route = require('./routes/doctorRoute.js');
+const post_route = require('./routes/postRoute.js');
 
 const router = express.Router();
 
@@ -24,3 +25,5 @@ app.use(bodyParser.json());
 app.use('/', patient_route);
 
 app.use('/', doctor_route);
+
+app.use('/', post_route);
