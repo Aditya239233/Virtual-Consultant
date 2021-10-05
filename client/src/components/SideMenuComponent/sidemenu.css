@@ -1,82 +1,72 @@
-.sidemenu{
-    
-    height: 100%;
-    display: flexbox;
-    width: 250px;
-    border-color: black;
-    
-    -webkit-box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.59);
-    box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.59);
-    
-    
+.sidemenu {
+  height: 100%;
+  display: flexbox;
+  width: 250px;
+  border-color: black;
+
+  -webkit-box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.59);
+  box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.59);
 }
 
-.text{
-    flex-direction: column;
-    flex:content;
-    font-size: larger;
-    width: 100%;
-    padding: 10px;
-    background-color:rgb(155, 155, 155);
-    font-size: 600;
-    font-weight: 600;
+.text {
+  flex-direction: column;
+  flex: content;
+  font-size: larger;
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(155, 155, 155);
+  font-size: 600;
+  font-weight: 600;
 }
 
-.menuPost{
-    
-    flex-direction: column;
-    flex:content;
-    font-size: larger;
-    width: 100%;
-    padding: 10px;
-    cursor: pointer;
-    
+.menuPost {
+  flex-direction: column;
+  flex: content;
+  font-size: larger;
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
 }
 
-.menuPost:hover{
-    background-color:rgb(231, 231, 231);
+.menuPost:hover {
+  background-color: rgb(231, 231, 231);
 }
 
-.menuConsultation{
-    
-    flex-direction: column;
-    flex:content;
-    font-size: larger;
-    width: 100%;
-    padding: 10px;
-    cursor: pointer;
+.menuConsultation {
+  flex-direction: column;
+  flex: content;
+  font-size: larger;
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
 }
 
-.menuConsultation:hover{
-    background-color:rgb(231, 231, 231);
+.menuConsultation:hover {
+  background-color: rgb(231, 231, 231);
 }
 
-.menuChats{
-    
-    flex-direction: column;
-    flex:content;
-    font-size: larger;
-    width: 100%;
-    padding: 10px;
-    cursor: pointer;
+.menuChats {
+  flex-direction: column;
+  flex: content;
+  font-size: larger;
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
 }
 
-.menuChats:hover{
-    background-color:rgb(231, 231, 231);
+.menuChats:hover {
+  background-color: rgb(231, 231, 231);
 }
 
-
-.menuSearch{
-    
-    flex-direction: column;
-    flex:content;
-    font-size: larger;
-    width: 100%;
-    padding: 10px;
-    cursor: pointer;
+.menuSearch {
+  flex-direction: column;
+  flex: content;
+  font-size: larger;
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
 }
 
-.menuSearch:hover{
-    background-color:rgb(231, 231, 231);
+.menuSearch:hover {
+  background-color: rgb(231, 231, 231);
 }
-

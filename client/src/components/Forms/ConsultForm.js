@@ -1,17 +1,11 @@
 import * as React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import { Link as LinkR } from "react-router-dom";
-import { useState } from "react";
 import SeverityForm from "../DropDown/severe";
 import TypeOPForm from "../DropDown/type";
 import Attach from "../Attach/attach";
-
 
 const ConsultForm = () => {
   const handleSubmit = (event) => {
@@ -20,44 +14,36 @@ const ConsultForm = () => {
     // eslint-disable-next-line no-console
   };
 
-
-
   return (
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-              <SeverityForm />
-              </Grid>
-              <Grid item xs={12}>
-            <TypeOPForm />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="symptoms"
-                  label="Describe your Symptoms"
-                  type="symptoms"
-                  id="symptoms"
-                  autoComplete="symptoms"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Attach />
-              </Grid>
-              <Grid item xs={12}>
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Submit Request
-            </Button>
-          </Box>
+    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <SeverityForm />
+        </Grid>
+        <Grid item xs={12}>
+          <TypeOPForm />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            required
+            fullWidth
+            name="symptoms"
+            label="Describe your Symptoms"
+            type="symptoms"
+            id="symptoms"
+            autoComplete="symptoms"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Attach />
+        </Grid>
+        <Grid item xs={12}></Grid>
+      </Grid>
+      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+        Submit Request
+      </Button>
+    </Box>
   );
-}
+};
 
 export default ConsultForm;
