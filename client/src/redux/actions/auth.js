@@ -1,105 +1,102 @@
 import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
+  REGISTER_SUCCESS_DOCTOR,
+  REGISTER_FAIL_DOCTOR,
+  LOGIN_SUCCESS_DOCTOR,
+  LOGIN_FAIL_DOCTOR,
+  REGISTER_SUCCESS_PATIENT,
+  REGISTER_FAIL_PATIENT,
+  LOGIN_SUCCESS_PATIENT,
+  LOGIN_FAIL_PATIENT,
   LOGOUT,
   SET_MESSAGE,
-} from "./types";
+} from "./type";
+import AuthService from "../../services/auth.service";
 
-import AuthService from "../services/auth.service";
-
-export const register =
+export const register_doctor =
   (
-    username,
     email,
+    username,
+    medical_id,
     password,
-    account_type,
-    firstName,
-    lastName,
-    medicalID,
-    height,
-    weight,
-    medicalHistory
+    first_name,
+    last_name,
+    confirm_password,
+    specialization
   ) =>
   (dispatch) => {
-    return AuthService.register(
-      username,
+    console.log("register");
+    return AuthService.register_doctor(
       email,
+      username,
+      medical_id,
       password,
-      account_type,
-      firstName,
-      lastName,
-      medicalID,
-      height,
-      weight,
-      medicalHistory
+      first_name,
+      last_name,
+      confirm_password,
+      specialization
     ).then(
       (response) => {
         dispatch({
-          type: REGISTER_SUCCESS,
-        });
-
-        dispatch({
-          type: SET_MESSAGE,
-          payload: response.data.message,
+          type: REGISTER_SUCCESS_DOCTOR,
+          payload: username,
         });
 
         return Promise.resolve();
       },
       (error) => {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
+        console.log("heree");
+        // const message =
+        //   (error.response &&
+        //     error.response.data &&
+        //     error.response.data.message) ||
+        //   error.message ||
+        //   error.toString();
 
         dispatch({
-          type: REGISTER_FAIL,
+          type: REGISTER_FAIL_DOCTOR,
         });
 
-        dispatch({
-          type: SET_MESSAGE,
-          payload: message,
-        });
+        // dispatch({
+        //   type: SET_MESSAGE,
+        //   payload: message,
+        // });
 
         return Promise.reject();
       }
     );
   };
 
-export const login = (username, password) => (dispatch) => {
-  return AuthService.login(username, password).then(
-    (data) => {
-      dispatch({
-        type: LOGIN_SUCCESS,
-        payload: { user: data },
-      });
+// export const login = (username, password) => (dispatch) => {
+//   return AuthService.login(username, password).then(
+//     (data) => {
+//       dispatch({
+//         type: LOGIN_SUCCESS,
+//         payload: { user: data },
+//       });
 
-      return Promise.resolve();
-    },
-    (error) => {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+//       return Promise.resolve();
+//     },
+//     (error) => {
+//       const message =
+//         (error.response &&
+//           error.response.data &&
+//           error.response.data.message) ||
+//         error.message ||
+//         error.toString();
 
-      dispatch({
-        type: LOGIN_FAIL,
-      });
+//       dispatch({
+//         type: LOGIN_FAIL,
+//       });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+//       dispatch({
+//         type: SET_MESSAGE,
+//         payload: message,
+//       });
 
-      return Promise.reject();
-    }
-  );
-};
+//       return Promise.reject();
+//     }
+//   );
+// };
 
 export const logout = () => (dispatch) => {
   AuthService.logout();

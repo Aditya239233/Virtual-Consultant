@@ -10,21 +10,27 @@ import Consult from "./pages/Consult";
 import Messenger from "./pages/Messenger/Messenger";
 import LiveChat from "./pages/LiveChat/LiveChat";
 
+// Redux
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/feed" exact component={Feed} />
-        <Route path="/signup" exact component={SignUp} />
-        <Route path="/signupDoctor" exact component={SignUpDoctor} />
-        <Route path="/consult" exact component={Consult} />
-        <Route path="/messenger" exact component={Messenger} />
-        <Route path="/livechat" exact component={LiveChat} />
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={SignUp} />
+          <Route path="/feed" exact component={Feed} />
+          <Route path="/signupDoctor" exact component={SignUpDoctor} />
+          <Route path="/consult" exact component={Consult} />
+          <Route path="/messenger" exact component={Messenger} />
+          <Route path="/livechat" exact component={LiveChat} />
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 

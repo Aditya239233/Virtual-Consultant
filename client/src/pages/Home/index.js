@@ -13,10 +13,10 @@ const Home = () => {
 
   return (
     <>
-      <div class="container">
-        <div class="bg">
+      <div className="container">
+        <div className="bg">
           <video
-            class="video"
+            className="video"
             autoPlay
             loop
             muted
@@ -24,12 +24,12 @@ const Home = () => {
             type="video/mp4"
           />
         </div>
-        <div class="body">
-          <h1 class="header">Consultations Made Easy</h1>
-          <p class="paragraph">
+        <div className="body">
+          <h1 className="header">Consultations Made Easy</h1>
+          <p className="paragraph">
             Sign up for a new account now for easy consultations
           </p>
-          <div class="button-wrapper">
+          <div className="button-wrapper">
             <Button
               to="/signup"
               onMouseEnter={onHover}
@@ -39,9 +39,9 @@ const Home = () => {
             >
               Get started{" "}
               {hover ? (
-                <MdKeyboardArrowRight class="arrow-1" />
+                <MdKeyboardArrowRight className="arrow-1" />
               ) : (
-                <MdArrowForward class="arrow-1" />
+                <MdArrowForward className="arrow-1" />
               )}
             </Button>
           </div>

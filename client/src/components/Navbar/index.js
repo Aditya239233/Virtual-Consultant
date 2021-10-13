@@ -6,65 +6,65 @@ import "./index.css";
 
 const Navbar = () => {
   return (
-    <nav class="navbar">
-      <div class="navbar-container topbarLeft">
-        <LinkR to="/" class="logo">
+    <nav className="navbar">
+      <div className="navbar-container topbarLeft">
+        <LinkR to="/" className="logo">
           Virtual Consultant
         </LinkR>
-        <ul class="nav-menu">
-          <li class="nav-item">
-            <LinkS to="/about" class="nav-links">
+        <ul className="nav-menu">
+          <li className="nav-item">
+            <LinkS to="/about" className="nav-links">
               About
             </LinkS>
           </li>
-          <li class="nav-item">
-            <LinkS to="/services" class="nav-links">
+          <li className="nav-item">
+            <LinkS to="/services" className="nav-links">
               Services
             </LinkS>
           </li>
         </ul>
-        <nav class="nav-button">
-          <LinkR class="nav-button-link" to="/login">
+        <nav className="nav-button">
+          <LinkR className="nav-button-link" to="/login">
             Sign In
           </LinkR>
         </nav>
       </div>
-      {/* <div className="topbarCenter">
-        <div className="searchbar">
-          <Search className="searchIcon" />
+      {/* <div classNameName="topbarCenter">
+        <div classNameName="searchbar">
+          <Search classNameName="searchIcon" />
           <input
             placeholder="Search for Doctors or posts"
-            className="searchInput"
+            classNameName="searchInput"
           />
         </div>
       </div>
-      <div className="topbarRight">
-        <div className="topbarLinks">
-          <span className="topbarLink">Homepage</span>
-          <span className="topbarLink">Timeline</span>
+      <div classNameName="topbarRight">
+        <div classNameName="topbarLinks">
+          <span classNameName="topbarLink">Homepage</span>
+          <span classNameName="topbarLink">Timeline</span>
         </div>
-        <div className="topbarIcons">
-          <div className="topbarIconItem">
-            <Person className="personPicture" />
-            <span className="topbarIconBadge">1</span>
+        <div classNameName="topbarIcons">
+          <div classNameName="topbarIconItem">
+            <Person classNameName="personPicture" />
+            <span classNameName="topbarIconBadge">1</span>
           </div>
         </div>
-        <div className="topbarIcons">
-          <div className="topbarIconItem">
-            <Chat className="chatNotification" />
-            <span className="topbarIconBadge">2</span>
+        <div classNameName="topbarIcons">
+          <div classNameName="topbarIconItem">
+            <Chat classNameName="chatNotification" />
+            <span classNameName="topbarIconBadge">2</span>
           </div>
         </div>
-        <div className="topbarIcons">
-          <div className="topbarIconItem">
-            <Notifications className="notification" />
-            <span className="topbarIconBadge">1</span>
+        <div classNameName="topbarIcons">
+          <div classNameName="topbarIconItem">
+            <Notifications classNameName="notification" />
+            <span classNameName="topbarIconBadge">1</span>
           </div>
         </div>
         <img
           src="/assets/person/Daryl passport.jpg"
           alt=""
-          className="topbarImg"
+          classNameName="topbarImg"
         />
       </div> */}
     </nav>

@@ -1,5 +1,6 @@
 var express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const patient_route = require("./routes/patientRoute.js");
 const doctor_route = require("./routes/doctorRoute.js");
 const chat_route = require("./routes/chatRoute.js");
@@ -13,7 +14,8 @@ const io = require("socket.io")(server);
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
-
+app.use(express.json({ extended: false }));
+app.use(cors());
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -27,6 +29,8 @@ app.use("/", doctor_route);
 app.use("/", chat_route);
 
 app.use("/", patient_route);
+app.use("/", post_route);
+
 io.on("connection", (socket) => {
   socket.on("join-room", (roomId, userId) => {
     console.log(roomId, userId);
@@ -52,6 +56,3 @@ mongoose.connect(
     console.log("connected to mongodb successfully");
   }
 );
-app.use("/", doctor_route);
-
-app.use("/", post_route);
