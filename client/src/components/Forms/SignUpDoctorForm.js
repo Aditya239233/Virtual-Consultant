@@ -29,7 +29,7 @@ const SignUpDoctor = () => {
     axios
       .post("/registerdoctor", data)
       .then((res) => {
-        if (res.status == 200) setSignedUp(true);
+        if (res.status === 200) setSignedUp(true);
       })
       .catch((e) => console.log(e));
   };

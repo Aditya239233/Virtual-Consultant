@@ -65,16 +65,10 @@ const patientLogin = async (request, response) => {
           statuscode: response.statusCode,
         });
       } else {
-        response.json({
-          statuscode: response.statusCode,
-          message: "password incorrect",
-        });
+        response.status(400).send({ message: "inccorect password" });
       }
     } else {
-      response.json({
-        statuscode: 400,
-        message: "user not found",
-      });
+      response.status(400).send({ message: "user not found" });
     }
   } catch (error) {
     response.json({

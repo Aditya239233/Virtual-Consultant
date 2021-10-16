@@ -18,13 +18,16 @@ export const login_doctor = (username, password) => async (dispatch) => {
 };
 
 export const login_patient = (username, password) => async (dispatch) => {
-  const body = JSON.stringify({
-    username,
-    password,
-  });
+  const body = JSON.stringify({ username, password });
   await axios
-    .get("/loginpatient", body)
+    .get("/loginpatient", {
+      params: {
+        username,
+        password,
+      },
+    })
     .then((res) => {
+      console.log(res);
       dispatch({
         type: LOGIN_PATIENT,
         payload: res.data,

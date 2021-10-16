@@ -31,43 +31,40 @@ const Navbar = ({ auth: { isLoggedIn } }) => {
 
   const authLinks = (
     <>
-      <div classNameName="topbarCenter">
-        <div classNameName="searchbar">
-          <Search classNameName="searchIcon" />
+      <div
+        className="topbarCenter"
+        style={{
+          paddingTop: "20px",
+          paddingLeft: "20px",
+        }}
+      >
+        <div className="searchbar">
+          <Search className="searchIcon" />
           <input
             placeholder="Search for Doctors or posts"
-            classNameName="searchInput"
+            className="searchInput"
           />
         </div>
       </div>
-      <div classNameName="topbarRight">
-        <div classNameName="topbarLinks">
-          <span classNameName="topbarLink">Homepage</span>
-          <span classNameName="topbarLink">Timeline</span>
+      <div className="topbarRight">
+        <div className="topbarLinks">
+          <span className="topbarLink"></span>
         </div>
-        <div classNameName="topbarIcons">
-          <div classNameName="topbarIconItem">
-            <Person classNameName="personPicture" />
-            <span classNameName="topbarIconBadge">1</span>
+        <div className="topbarIcons">
+          <div className="topbarIconItem">
+            <Person className="personPicture" />
           </div>
         </div>
-        <div classNameName="topbarIcons">
-          <div classNameName="topbarIconItem">
-            <Chat classNameName="chatNotification" />
-            <span classNameName="topbarIconBadge">2</span>
+        <div className="topbarIcons">
+          <div className="topbarIconItem">
+            <Chat className="chatNotification" />
           </div>
         </div>
-        <div classNameName="topbarIcons">
-          <div classNameName="topbarIconItem">
-            <Notifications classNameName="notification" />
-            <span classNameName="topbarIconBadge">1</span>
+        <div className="topbarIcons">
+          <div className="topbarIconItem">
+            <Notifications className="notification" />
           </div>
         </div>
-        <img
-          src="/assets/person/Daryl passport.jpg"
-          alt=""
-          classNameName="topbarImg"
-        />
       </div>
     </>
   );
@@ -77,7 +74,7 @@ const Navbar = ({ auth: { isLoggedIn } }) => {
         <LinkR to="/" className="logo">
           Virtual Consultant
         </LinkR>
-        <Fragment>{isLoggedIn ? authLinks : guestLinks}</Fragment>
+        {isLoggedIn ? authLinks : guestLinks}
       </div>
     </nav>
   );
