@@ -8,15 +8,34 @@ import axios from "axios";
 
 const SignUpPatient = () => {
   const [signedUp, setSignedUp] = React.useState(false);
+  const [formData, setFormData] = React.useState({
+    first_name: "",
+    last_name: "",
+    username: "",
+    email: "",
+    password: "",
+    weight: "",
+    height: "",
+    allergies: "",
+    confirm_password: "",
+  });
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const data = formData;
 
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
     axios
-      .post("/registerpatient", data)
+      .post("/registerpatient", data, config)
       .then((res) => {
-        setSignedUp(true);
+        if (res.status == 200) setSignedUp(true);
       })
       .catch((e) => console.log(e));
   };
@@ -26,105 +45,131 @@ const SignUpPatient = () => {
   }
 
   return (
-    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            autoComplete="fname"
-            name="firstName"
-            required
-            fullWidth
-            id="firstName"
-            label="First Name"
-            autoFocus
-          />
+    <form className="form" onSubmit={(e) => handleSubmit(e)}>
+      <Box component="" noValidate sx={{ mt: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              autoComplete="fname"
+              name="first_name"
+              required
+              fullWidth
+              id="first_name"
+              label="First Name"
+              autoFocus
+              onChange={(e) => onChange(e)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              fullWidth
+              id="last_name"
+              label="Last Name"
+              name="last_name"
+              autoComplete="lname"
+              onChange={(e) => onChange(e)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              onChange={(e) => onChange(e)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              onChange={(e) => onChange(e)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="new-password"
+              onChange={(e) => onChange(e)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              name="confirm_password"
+              label="confirm_password"
+              type="password"
+              id="confirm_password"
+              autoComplete="Re-new-password"
+              onChange={(e) => onChange(e)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              fullWidth
+              id="height"
+              label="Height(m)"
+              name="height"
+              autoComplete="height"
+              onChange={(e) => onChange(e)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              fullWidth
+              id="weight"
+              label="weight(kg)"
+              name="weight"
+              autoComplete="weight"
+              onChange={(e) => onChange(e)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              name="allergies"
+              label="allergies"
+              type="Medical History"
+              id="allergies"
+              autoComplete="Medical History"
+              onChange={(e) => onChange(e)}
+            />
+          </Grid>
+          <Grid item xs={12}></Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            fullWidth
-            id="lastName"
-            label="Last Name"
-            name="lastName"
-            autoComplete="lname"
-          />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+        >
+          Sign Up
+        </Button>
+        <Grid container justifyContent="flex-end">
+          <Grid item>
+            <LinkR variant="body2" to="/signupDoctor">
+              Want to join as a Doctor instead? Click here.
+            </LinkR>
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="new-password"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            fullWidth
-            name="Re-password"
-            label="Re-Password"
-            type="Re-password"
-            id="Re-password"
-            autoComplete="Re-new-password"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            fullWidth
-            id="Height"
-            label="Height(m)"
-            name="Height"
-            autoComplete="height"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            fullWidth
-            id="Weight"
-            label="Weight(kg)"
-            name="Weight"
-            autoComplete="weight"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            fullWidth
-            name="Medical History"
-            label="Medical History"
-            type="Medical History"
-            id="Medical History"
-            autoComplete="Medical History"
-          />
-        </Grid>
-        <Grid item xs={12}></Grid>
-      </Grid>
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-        Sign Up
-      </Button>
-      <Grid container justifyContent="flex-end">
-        <Grid item>
-          <LinkR variant="body2" to="/signupDoctor">
-            Want to join as a Doctor instead? Click here.
-          </LinkR>
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </form>
   );
 };
 

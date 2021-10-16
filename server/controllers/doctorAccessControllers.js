@@ -6,7 +6,6 @@ const fs = require("fs");
 const { v4: uuidV4 } = require("uuid");
 
 const doctorRegister = async (request, response) => {
-  console.log("HIII");
   try {
     const doctorExists = await doctor.findOne({
       medical_id: request.body.medical_id,

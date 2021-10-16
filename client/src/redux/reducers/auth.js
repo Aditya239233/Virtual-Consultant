@@ -6,7 +6,8 @@ const initialState = user
   ? { isLoggedIn: true, user }
   : { isLoggedIn: false, user };
 
-export function auth(state = initialState, action) {
+// eslint-disable-next-line import/no-anonymous-default-export
+export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case LOGIN_DOCTOR:
@@ -37,6 +38,6 @@ export function auth(state = initialState, action) {
         user: null,
       };
     default:
-      return;
+      return state;
   }
 }

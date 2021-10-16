@@ -30,6 +30,7 @@ const patientRegister = async (request, response) => {
     allergies: request.body.allergies,
     confirm_password: request.body.confirm_password,
   });
+  console.log(request);
   bcrypt.hash(new_patient.password, 10, function (err, hash) {
     if (err) {
       return next(err);
