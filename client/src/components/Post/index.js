@@ -1,10 +1,16 @@
 import "./index.css";
 import { MoreVert } from "@material-ui/icons";
+import axios from "axios"
 
+async function d(p) {
+  console.log("hello",p)
+  const k = await axios.delete("http://localhost:8000/deletepost", { params: { id: p } });
+  console.log(k)
+}
 const Post = (post) => {
   return (
     <div className="post">
-      {console.log(post)}
+      {console.log(post['post']['id'])}
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
@@ -13,7 +19,7 @@ const Post = (post) => {
             <span className="postDate"> 5 mins ago</span>
           </div>
           <div className="postTopRight">
-            <button>Delete</button>
+            <button onClick={() => d(post['post']['id'])}>Delete</button>
           </div>
         </div>
         <div className="postCenter">

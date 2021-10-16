@@ -1,8 +1,13 @@
 const patient = require("../model/patient");
 const consultationRequest = require("../model/consultationRequest");
 const bcrypt = require("bcrypt");
-const { v4: uuidV4 } = require("uuid");
-const { request, response } = require("express");
+const {
+  v4: uuidV4
+} = require("uuid");
+const {
+  request,
+  response
+} = require("express");
 const doctor = require("../model/doctor");
 
 const patientRegister = async (request, response) => {
@@ -121,18 +126,26 @@ const followDoctor = async (request, response) => {
 
     if (!doc.followers.includes(request.body.patient_username)) {
       await doc.updateOne({
-        $push: { followers: request.body.patient_username },
+        $push: {
+          followers: request.body.patient_username
+        },
       });
       await pat.updateOne({
-        $push: { following: request.body.doctor_username },
+        $push: {
+          following: request.body.doctor_username
+        },
       });
       response.status(200).json("Following");
     } else {
       await doc.updateOne({
-        $pull: { followers: request.body.patient_username },
+        $pull: {
+          followers: request.body.patient_username
+        },
       });
       await pat.updateOne({
-        $pull: { following: request.body.doctor_username },
+        $pull: {
+          following: request.body.doctor_username
+        },
       });
       response.status(200).json("Unfollowed");
     }
@@ -143,6 +156,7 @@ const followDoctor = async (request, response) => {
 };
 
 const sendConsultationRequest = (request, response) => {
+  console.log(request.body)
   const new_consultation = new consultationRequest({
     type: request.body.type,
     severity_level: request.body.severity_level,
@@ -178,10 +192,14 @@ const unfollowDoctor = async (request, response) => {
     });
     if (Doctor.followers.includes(request.body.patient_username)) {
       await Doctor.updateOne({
-        $pull: { followers: request.body.patient_username },
+        $pull: {
+          followers: request.body.patient_username
+        },
       });
       await Patient.updateOne({
-        $pull: { following: request.body.doctor_username },
+        $pull: {
+          following: request.body.doctor_username
+        },
       });
       response.status(200).json("Doctor has been unfollowed");
     } else {
