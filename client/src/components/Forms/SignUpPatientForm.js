@@ -3,18 +3,27 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import { Link as LinkR } from "react-router-dom";
+import { Link as LinkR, Redirect } from "react-router-dom";
+import axios from "axios";
 
-const SignUp = () => {
+const SignUpPatient = () => {
+  const [signedUp, setSignedUp] = React.useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    axios
+      .post("/registerpatient", data)
+      .then((res) => {
+        setSignedUp(true);
+      })
+      .catch((e) => console.log(e));
   };
+
+  if (signedUp) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -119,4 +128,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpPatient;

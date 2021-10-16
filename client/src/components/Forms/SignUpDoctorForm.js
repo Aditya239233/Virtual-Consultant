@@ -4,37 +4,25 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { Link as LinkR, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { register_doctor } from "../../redux/actions/auth";
-import PropTypes from "prop-types";
+import axios from "axios";
 
-const SignUpDoctor = ({ register_doctor, username }) => {
+const SignUpDoctor = () => {
+  const [signedUp, setSignedUp] = React.useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    if (data.password !== data.confirm_password) {
-      alert("Passwords dont match");
-    } else {
-      register_doctor(
-        data.email,
-        data.username,
-        data.medical_id,
-        data.password,
-        data.first_name,
-        data.last_name,
-        data.confirm_password,
-        data.specialization
-      );
-    }
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    axios
+      .post("/registerdoctor", data)
+      .then((res) => {
+        setSignedUp(true);
+      })
+      .catch((e) => console.log(e));
   };
 
-  if (username && username != "") {
-    return <Redirect to="/feed" />;
+  if (signedUp) {
+    return <Redirect to="/login" />;
   }
 
   return (
@@ -140,13 +128,4 @@ const SignUpDoctor = ({ register_doctor, username }) => {
   );
 };
 
-SignUpDoctor.propTypes = {
-  register_doctor: PropTypes.func.isRequired,
-  username: PropTypes.string,
-};
-
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { register_doctor })(SignUpDoctor);
+export default SignUpDoctor;

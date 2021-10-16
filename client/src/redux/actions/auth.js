@@ -1,107 +1,34 @@
-import {
-  REGISTER_SUCCESS_DOCTOR,
-  REGISTER_FAIL_DOCTOR,
-  LOGIN_SUCCESS_DOCTOR,
-  LOGIN_FAIL_DOCTOR,
-  REGISTER_SUCCESS_PATIENT,
-  REGISTER_FAIL_PATIENT,
-  LOGIN_SUCCESS_PATIENT,
-  LOGIN_FAIL_PATIENT,
-  LOGOUT,
-  SET_MESSAGE,
-} from "./type";
-import AuthService from "../../services/auth.service";
+import { LOGIN_DOCTOR, LOGIN_PATIENT } from "./type";
+import axios from "axios";
 
-export const register_doctor =
-  (
-    email,
+export const login_doctor = (username, password) => async (dispatch) => {
+  const body = JSON.stringify({
     username,
-    medical_id,
     password,
-    first_name,
-    last_name,
-    confirm_password,
-    specialization
-  ) =>
-  (dispatch) => {
-    console.log("register");
-    return AuthService.register_doctor(
-      email,
-      username,
-      medical_id,
-      password,
-      first_name,
-      last_name,
-      confirm_password,
-      specialization
-    ).then(
-      (response) => {
-        dispatch({
-          type: REGISTER_SUCCESS_DOCTOR,
-          payload: username,
-        });
-
-        return Promise.resolve();
-      },
-      (error) => {
-        console.log("heree");
-        // const message =
-        //   (error.response &&
-        //     error.response.data &&
-        //     error.response.data.message) ||
-        //   error.message ||
-        //   error.toString();
-
-        dispatch({
-          type: REGISTER_FAIL_DOCTOR,
-        });
-
-        // dispatch({
-        //   type: SET_MESSAGE,
-        //   payload: message,
-        // });
-
-        return Promise.reject();
-      }
-    );
-  };
-
-// export const login = (username, password) => (dispatch) => {
-//   return AuthService.login(username, password).then(
-//     (data) => {
-//       dispatch({
-//         type: LOGIN_SUCCESS,
-//         payload: { user: data },
-//       });
-
-//       return Promise.resolve();
-//     },
-//     (error) => {
-//       const message =
-//         (error.response &&
-//           error.response.data &&
-//           error.response.data.message) ||
-//         error.message ||
-//         error.toString();
-
-//       dispatch({
-//         type: LOGIN_FAIL,
-//       });
-
-//       dispatch({
-//         type: SET_MESSAGE,
-//         payload: message,
-//       });
-
-//       return Promise.reject();
-//     }
-//   );
-// };
-
-export const logout = () => (dispatch) => {
-  AuthService.logout();
-
-  dispatch({
-    type: LOGOUT,
   });
+  await axios
+    .get("/logindoctor", body)
+    .then((res) => {
+      dispatch({
+        type: LOGIN_DOCTOR,
+        payload: res.data,
+      });
+    })
+    .catch((e) => console.log(e));
+};
+
+export const login_patient = (username, password) => async (dispatch) => {
+  const body = JSON.stringify({
+    username,
+    password,
+  });
+  await axios
+    .get("/loginpatient", body)
+    .then((res) => {
+      dispatch({
+        type: LOGIN_PATIENT,
+        payload: res.data,
+      });
+    })
+    .catch((e) => console.log(e));
 };

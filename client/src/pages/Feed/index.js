@@ -5,7 +5,7 @@ import Post from "../../components/Post";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-var posts = [];
+
 const Feed = () => {
   const [posts, setPosts] = useState([]);
   // eslint-disable-next-line react-hooks/exhaustive-deps

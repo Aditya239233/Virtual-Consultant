@@ -13,7 +13,7 @@ const Post = (post) => {
             <span className="postDate"> 5 mins ago</span>
           </div>
           <div className="postTopRight">
-            <MoreVert />
+            <button>Delete</button>
           </div>
         </div>
         <div className="postCenter">
