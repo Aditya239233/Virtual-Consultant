@@ -15,9 +15,13 @@ const createPost = async (request, response) => {
 
 const updatePost = async (request, response) => {
   try {
-    const post = await Post.findOne({ id: request.body.id });
+    const post = await Post.findOne({
+      id: request.body.id
+    });
     if (post) {
-      await post.updateOne({ $set: request.body });
+      await post.updateOne({
+        $set: request.body
+      });
       response.status(200).json("The post has been updated");
     } else {
       response.status(403).json("You can update only your post");
@@ -28,9 +32,11 @@ const updatePost = async (request, response) => {
 };
 
 const deletePost = async (request, response) => {
-  console.log(request.body);
+  console.log("post body", request.query['id']);
   try {
-    const post = await Post.findOne({ id: request.body.id });
+    const post = await Post.findOne({
+      id: request.query['id']
+    });
     console.log(post.id);
     if (post) {
       await post.deleteOne();
@@ -45,12 +51,22 @@ const deletePost = async (request, response) => {
 
 const likePost = async (request, response) => {
   try {
-    const post = await Post.findOne({ id: request.body.id });
+    const post = await Post.findOne({
+      id: request.body.id
+    });
     if (!post.likes.includes(request.body.username)) {
-      await post.updateOne({ $push: { likes: request.body.username } });
+      await post.updateOne({
+        $push: {
+          likes: request.body.username
+        }
+      });
       response.status(200).json("The post has been liked");
     } else {
-      await post.updateOne({ $pull: { likes: request.body.username } });
+      await post.updateOne({
+        $pull: {
+          likes: request.body.username
+        }
+      });
       response.status(200).json("The post has been disliked");
     }
   } catch (err) {
@@ -66,7 +82,9 @@ const timelinePostPatient = async (request, response) => {
     console.log(currentPatient.following);
     const doctorPosts = await Promise.all(
       currentPatient.following.map((DoctorUsername) => {
-        return Post.find({ username: DoctorUsername });
+        return Post.find({
+          username: DoctorUsername
+        });
       })
     );
     response.json(doctorPosts);
@@ -80,7 +98,9 @@ const timelinePostDoctor = async (request, response) => {
     const currentDoctor = await doctor.findOne({
       username: request.body.username,
     });
-    const doctorPosts = await Post.find({ username: currentDoctor.username });
+    const doctorPosts = await Post.find({
+      username: currentDoctor.username
+    });
     response.json(doctorPosts);
   } catch (err) {
     response.status(500).json(err);
