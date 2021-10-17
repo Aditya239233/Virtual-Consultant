@@ -117,7 +117,8 @@ const retrieveAllConversationPartners= async (request, response) => {
                 chat_partner={
                     name:chat_patient[i].doctorUsername,
                     preview_text:last_text.text,
-                    timestamp:last_text.timestamp
+                    timestamp:last_text.timestamp,
+                    sender:last_text.sender
                 }
                 chat_partners.push(chat_partner)
             }
@@ -148,7 +149,8 @@ const retrieveAllConversationPartners= async (request, response) => {
                 chat_partner={
                     name:chat_doctor[i].patientUsername,
                     preview_text:last_text.text,
-                    timestamp:last_text.timestamp
+                    timestamp:last_text.timestamp,
+                    sender:last_text.sender
                 }
                 chat_partners.push(chat_partner)
             }
