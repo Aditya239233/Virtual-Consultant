@@ -51,9 +51,11 @@ const newChat = async (request, response) => {
 }
 
 const retrieveConversation = async (request, response) => {
-    const chat_doc = await chat.find({
-        patientUsername: request.query["patientUsername"],
-        doctorUsername: request.query["doctorUsername"]
+    console.log(request.query["username1"])
+    console.log(request.query["username2"])
+    var chat_doc = await chat.find({
+        patientUsername: request.query["username1"],
+        doctorUsername: request.query["username2"]
     })
     if(chat_doc.length>0){
         text_messages=chat_doc[0].text_messages
@@ -67,10 +69,29 @@ const retrieveConversation = async (request, response) => {
     }
     else
     {
-        response.json({
-            'status': response.statusCode
+        chat_doc = await chat.find({
+            patientUsername: request.query["username2"],
+            doctorUsername: request.query["username1"]
         })
+        if(chat_doc.length>0){
+            text_messages=chat_doc[0].text_messages
+            console.log(text_messages)
+            text_messages=text_messages.sort((a, b) => (a.timestamp) > new Date(b.timestamp) ? 1 : -1)
+            console.log(text_messages)
+            response.json({
+                'status': response.statusCode,
+                'chat_messages':text_messages
+            })
+        }
+        else
+        {
+            response.json({
+                'status': 400,
+                'chat_messages':[]
+            })
+        }
     }
+    
     
 }
 

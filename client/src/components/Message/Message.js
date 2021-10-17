@@ -1,19 +1,18 @@
 import React from "react";
 import "./message.css";
 
-export default function Message() {
+export default function Message(props) {
   return (
     <>
       <div className="message">
         <div className="messageTop">
           <p className="sender">
-            Dr. John Tan <br />
+            { props.sender } <br />
           </p>
-          <p className="defaultMsg">You are now consulting Dr. John Tan</p>
+          <p className="defaultMsg">{ props.text }</p>
         </div>
         <div className="messageDateTime">
-          <div className="messageDate">01/10/2021</div>
-          <div className="messageTime">11:26 pm</div>
+          <div className="messageDate">{ props.timestamp }</div>
         </div>
       </div>
     </>
