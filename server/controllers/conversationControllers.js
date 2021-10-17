@@ -104,7 +104,24 @@ const retrieveAllConversationPartners= async (request, response) => {
         // console.log("Its a patient")
         for(let i = 0; i < chat_patient.length; i++){ 
             console.log(chat_patient[i].doctorUsername)
-            chat_partners.push(chat_patient[i].doctorUsername)
+    
+            var chat_doc = await chat.find({
+                patientUsername: request.query["username"],
+                doctorUsername: chat_patient[i].doctorUsername
+            })
+            console.log(chat_doc)
+            if(chat_doc.length>0){
+                text_messages=chat_doc[0].text_messages
+                text_messages=text_messages.sort((a, b) => (a.timestamp) > new Date(b.timestamp) ? 1 : -1)
+                last_text=text_messages[text_messages.length-1]
+                chat_partner={
+                    name:chat_patient[i].doctorUsername,
+                    preview_text:last_text.text,
+                    timestamp:last_text.timestamp
+                }
+                chat_partners.push(chat_partner)
+            }
+            
     }
     console.log(chat_partners)
     response.json({
@@ -119,8 +136,22 @@ const retrieveAllConversationPartners= async (request, response) => {
     chat_partners=[]
     if(chat_doctor.length>0){
         for(let i = 0; i < chat_doctor.length; i++){ 
-            console.log(chat_doctor[i].patientUsername)
-            chat_partners.push(chat_doctor[i].patientUsername)
+            //console.log(chat_doctor[i].patientUsername)
+            var chat_doc = await chat.find({
+                patientUsername: chat_doctor[i].patientUsername,
+                doctorUsername: request.query["username"]
+            })
+            if(chat_doc.length>0){
+                text_messages=chat_doc[0].text_messages
+                text_messages=text_messages.sort((a, b) => (a.timestamp) > new Date(b.timestamp) ? 1 : -1)
+                last_text=text_messages[text_messages.length-1]
+                chat_partner={
+                    name:chat_doctor[i].patientUsername,
+                    preview_text:last_text.text,
+                    timestamp:last_text.timestamp
+                }
+                chat_partners.push(chat_partner)
+            }
     }
     
     console.log(chat_partners)
@@ -133,6 +164,9 @@ const retrieveAllConversationPartners= async (request, response) => {
 }
     
 }
+            
+    
+
 
 module.exports={
     newChat,
