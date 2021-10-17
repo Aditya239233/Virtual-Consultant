@@ -8,8 +8,8 @@ import axios from 'axios';
 
 const LiveChat = () => {
 const [chats, setChats]=useState([]);
-const [username, setUsername]=useState('Arat')
-const [partner, setPartner]=useState('Shruthi')
+const [username, setUsername]=useState('Shruthi')
+const [partner, setPartner]=useState('Arat')
 
 useEffect(()=>{
   axios.get('http://localhost:8000/retrieveConversation',{
@@ -69,7 +69,7 @@ useEffect(()=>{
             {
               chats.map((chat)=>{
                 return <div className={chat.sender==username? "chatSend":"chatReceive"}>
-                  <Message sender={chat.sender} text={chat.text} timestamp={chat.timestamp}/>
+                  <Message sender={chat.sender} text={chat.text} timestamp={chat.timestamp} username={username}/>
                   </div>
               })
             }

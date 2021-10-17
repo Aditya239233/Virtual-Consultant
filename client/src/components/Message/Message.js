@@ -7,7 +7,7 @@ export default function Message(props) {
       <div className="message">
         <div className="messageTop">
           <p className="sender">
-            { props.sender } <br />
+          {props.sender==props.username? "You":props.sender} <br />
           </p>
           <p className="defaultMsg">{ props.text }</p>
         </div>
