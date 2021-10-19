@@ -131,28 +131,28 @@ const viewNotifications = async (request, response) => {
     type: request.query["type"],
   });
   let filtered_requests = [];
+  console.log(consultation_requests.length)
   for (let i = 0; i < consultation_requests.length; i++) {
     severity = consultation_requests[i].severity_level;
-    timestamp = consultation_requests[i].timestamp;
-    var today = new Date(Date.now() * 1000);
-    let diffMilli = today - timestamp;
+    timestamp = Math.round(consultation_requests[i].timestamp.getTime()/1000);
+    today=Math.round(Date.now()/1000);
+    let diffSeconds = today - timestamp;
     console.log(today)
-    var diffMins = Math.round(((diffMilli % 86400000) % 3600000) / 60000);
+    console.log("Hello")
+    console.log(timestamp)
+    //var diffMins = Math.round(((diffMilli % 86400000) % 3600000) / 60000);
     if (severity == "High") {
-      if (diffMins < 10) {
-        console.log("High",diffMins);
+      if (diffSeconds < 600) {
         filtered_requests.push(consultation_requests[i]);
       }
     }
     if (severity == "Medium") {
-      if (diffMins < 20) {
-        console.log("Medium",diffMins);
+      if (diffSeconds < 1200) {
         filtered_requests.push(consultation_requests[i]);
       }
     }
     if (severity == "Low") {
-      if (diffMins < 30) {
-        console.log("Low",diffMins);
+      if (diffSeconds < 1800) {
         filtered_requests.push(consultation_requests[i]);
       }
     }
@@ -165,7 +165,7 @@ const viewNotifications = async (request, response) => {
 
 const acceptConsultationRequest = async (request, response) => {
   const accepted_request = await consultationRequest.findOneAndDelete({
-    _id: ObjectId(request.body.id),
+    _id: ObjectId(request.data.id),
   });
   console.log(accepted_request);
   response.json({

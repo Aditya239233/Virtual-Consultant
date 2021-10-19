@@ -46,6 +46,7 @@ const Notification = () => {
         <div className="activeChat">
           <div className="activeChatWrapper">
             {consultationRequests.map((request) => {
+              console.log(request._id)
               return (
                 <ConsultationPreview
                   id={request._id}

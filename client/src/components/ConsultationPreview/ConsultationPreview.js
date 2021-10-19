@@ -7,15 +7,16 @@ import axios from 'axios';
 
 export default function MessagePreview(props) {
     const handleAccept=()=>{
+      console.log(props.id)
         axios.post('/chat',{
             patientUsername:props.sender,
             doctorUsername:'try',
             text:props.text+" "+"Severity level: "+props.severity_level,
             sender:props.sender
-        }).then(()=>{
-            axios.delete('/acceptconsultationrequest',{
+        }).then((result)=>{
+            axios.delete('/acceptconsultationrequest',{data:{
                 id:props.id
-            }).then(()=>{
+            }}).then(()=>{
                 window.location.href='http://localhost:3000/messenger'
             })
            
