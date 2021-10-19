@@ -45,10 +45,12 @@ const Navbar = ({ auth: { isLoggedIn } }) => {
           />
         </div>
       </div>
+
       <div className="topbarRight">
         <div className="topbarLinks">
           <span className="topbarLink"></span>
         </div>
+        <a href="http://localhost:3000/consult">Consultation</a>
         <div className="topbarIcons">
           <div className="topbarIconItem">
             <a href="http://localhost:3000/messenger">
