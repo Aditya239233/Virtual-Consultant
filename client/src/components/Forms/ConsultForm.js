@@ -33,17 +33,20 @@ const ConsultForm =  () => {
         <Grid item xs={12}>
         <label id="severe_level">
           Select Severity Level:
-          <select value={severity} onChange={handleChangeSeverity}>
+          <select value={severity} onChange={handleChangeSeverity} required>
+            <option value="">Select Severity Level</option>
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
           </select>
         </label>
         </Grid>
+        <br/>
         <Grid item xs={12}>
         <label id="type">
           Select Type of Problem:
-          <select value= {type} onChange={handleChangeType}>
+          <select value= {type} onChange={handleChangeType} required>
+            <option value="">Select Problem Type</option>
             <option value="flu">Flu</option>
             <option value="heart disease">Heart Disease</option>
             <option value="mental">Mental Related</option>
@@ -61,9 +64,6 @@ const ConsultForm =  () => {
             id="symptoms"
             autoComplete="symptoms"
           />
-        </Grid>
-        <Grid item xs={12}>
-          <Attach />
         </Grid>
         <Grid item xs={12}></Grid>
       </Grid>
