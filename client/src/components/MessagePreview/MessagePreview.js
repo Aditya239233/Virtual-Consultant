@@ -1,5 +1,6 @@
 import React from "react";
 import "./messagePreview.css";
+import { Link } from 'react-router-dom';
 
 export default function MessagePreview(props) {
   return (
@@ -17,6 +18,7 @@ export default function MessagePreview(props) {
           {props.sender==props.username? "You":props.sender} : {props.preview_text}
         </p>
         <p className="time">{props.timestamp}</p>
+        <Link to={{pathname:'/livechat', userProps:{partner:props.name}}} className="btn btn-primary">Sign up</Link>
       </div>
     </div>
   );

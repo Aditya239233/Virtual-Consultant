@@ -4,17 +4,16 @@ import {
   LOGOUT
 } from "../actions/type";
 
-const user = null;
+//const user = JSON.parse(localStorage.getItem("user"));
+const user = null
 
-const initialState = user ?
-  {
-    isLoggedIn: true,
-    user
-  } :
-  {
-    isLoggedIn: false,
-    user
-  };
+const initialState = user ? {
+  isLoggedIn: true,
+  user
+} : {
+  isLoggedIn: false,
+  user
+};
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
