@@ -3,7 +3,7 @@ const doctor = require('../model/doctor')
 const patient = require("../model/patient");
 
 const newChat = async (request, response) => {
-    const chat_exists = await chat.find({
+    var chat_exists = await chat.find({
         patientUsername: request.body.patientUsername,
         doctorUsername: request.body.doctorUsername
     })
@@ -26,6 +26,29 @@ const newChat = async (request, response) => {
         });
     }
     else{
+            chat_exists = await chat.find({
+            patientUsername: request.body.doctorUsername,
+            doctorUsername: request.body.patientUsername
+        })
+        if(chat_exists.length>0)
+        {
+            chat_object=chat_exists[0].text_messages
+            new_text={
+                text: request.body.text,
+                timestamp: request.body.timestamp,
+                sender: request.body.sender
+            }
+            chat_object.push(new_text)
+            console.log(chat_object)
+            query={patientUsername: request.body.doctorUsername,
+                doctorUsername: request.body.patientUsername}
+            await chat.findOneAndUpdate(query, { text_messages: chat_object })
+    
+            response.json({
+                'statuscode': response.statusCode,
+            });
+        }
+        else{
     const new_chat = new chat({
         patientUsername: request.body.patientUsername,
         doctorUsername: request.body.doctorUsername,
@@ -48,6 +71,7 @@ const newChat = async (request, response) => {
             console.log("error", error);
         });
     }
+}
 }
 
 const retrieveConversation = async (request, response) => {

@@ -13,6 +13,28 @@ console.log(userProps)
 const [chats, setChats]=useState([]);
 const [username, setUsername]=useState('Shruthi')
 const [partner, setPartner]=useState(userProps.partner)
+const [ message, setMessage] = useState("")
+
+const handleSend = ()=>{
+  console.log(message)
+  const newMessage={
+    patientUsername:username,
+    doctorUsername:partner,
+    text:message,
+    sender:username,
+    timestamp:Date.now()
+  }
+  axios.post('http://localhost:8000/chat', newMessage
+  ).then((result)=>{
+      console.log(result.data)
+      const newChats=chats.concat(newMessage)
+      setChats(newChats);
+      setMessage("");
+  }).catch((error)=>{
+    console.log("Error happened")
+    console.log(error)
+  })
+}
 
 useEffect(()=>{
   axios.get('http://localhost:8000/retrieveConversation',{
@@ -81,11 +103,12 @@ useEffect(()=>{
             }
           </div>
           <div className="e">
-            <textarea
+            <input
               className="chatInputBox"
               placeholder="Write something here...."
-            ></textarea>
-            <button className="sendButton">
+              value={message}
+              onChange={(e) =>{ setMessage(e.target.value)}}></input>
+            <button className="sendButton" onClick={handleSend}>
               <p className="Send">Send</p>
             </button>
           </div>
