@@ -8,7 +8,8 @@ import Attach from "../Attach/attach";
 import axios from "axios"
 const ConsultForm =  () => {
   const [severity,setSeverity]=useState("Choose option");
-  const [type,setType]=useState("Choose Option")
+  const [type,setType]=useState("Choose option")
+  const [text, setText]=useState(" ")
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("severity",severity) 
@@ -19,6 +20,9 @@ const ConsultForm =  () => {
     text:data.get("symptoms"),
     sender: "user2"})
     console.log("req",send_req)
+    setSeverity("Choose option")
+    setType("Choose option")
+    setText("")
   };
  
   const handleChangeSeverity = (event)=>{
@@ -63,6 +67,8 @@ const ConsultForm =  () => {
             type="symptoms"
             id="symptoms"
             autoComplete="symptoms"
+            value={text}
+            onChange={(e) =>{ setText(e.target.value)}}
           />
         </Grid>
         <Grid item xs={12}></Grid>
