@@ -27,10 +27,8 @@ const LoginForm = ({ auth: { isLoggedIn } }) => {
     event.preventDefault();
     const data = formData;
     if (data.account_type === "Patient") {
-      console.log("hello");
       dispatch(login_patient(data.username, data.password));
     } else {
-      console.log("bye");
       dispatch(login_doctor(data.username, data.password));
     }
   };

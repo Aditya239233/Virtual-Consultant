@@ -3,34 +3,58 @@ import "./index.css";
 import Share from "../../components/Share";
 import Post from "../../components/Post";
 import axios from "axios";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-const Feed = () => {
+const Feed = ({ auth: { user } }) => {
   const [posts, setPosts] = useState([]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
-    const post = await axios.get("/patienttimeline", {
-      params: {
-        username: "user1",
-      },
-    });
-    setPosts(post);
-    console.log(posts);
+    if (user.account_type === "patient") {
+      const post = await axios.get("/patienttimeline", {
+        params: {
+          username: "user1",
+        },
+      });
+      setPosts(post);
+      // console.log(post);
+    } else {
+      const post = await axios.get("/doctortimeline", {
+        params: {
+          username: "new",
+        },
+      });
+      setPosts(post);
+      // console.log(post);
+    }
   }, []);
 
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share />
+        {user.account_type === "doctor" ? <Share /> : null}
         {posts.data
-          ? posts.data[0].map((post) => {
-              return <Post post={post} key={post.id} />;
+          ? posts.data.map((users) => {
+              console.log(users);
+              if (users.length) {
+                return users.map((post) => {
+                  return <Post post={post} key={post.id} />;
+                });
+              }
+              return <Post post={users} key={users.id} />;
             })
-          : null}
+          : "No posts to show"}
       </div>
     </div>
   );
 };
 
-export default Feed;
+Feed.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps, {})(Feed);

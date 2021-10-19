@@ -1,59 +1,41 @@
-import {
-  LOGIN_DOCTOR,
-  LOGIN_PATIENT,
-  LOGOUT
-} from "../actions/type";
+import { LOGIN_DOCTOR, LOGIN_PATIENT, LOGOUT } from "../actions/type";
 
-//const user = JSON.parse(localStorage.getItem("user"));
-const user = null
-
-const initialState = user ? {
-  isLoggedIn: true,
-  user
-} : {
-  isLoggedIn: false,
-  user
-};
+const username = localStorage.getItem("username");
+const account_type = localStorage.getItem("account_type");
+// const user = null;
+const initialState =
+  username && account_type
+    ? { isLoggedIn: true, user: { username, account_type } }
+    : { isLoggedIn: false, user: null };
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
-  const {
-    type,
-    payload
-  } = action;
+  const { type, payload } = action;
+  console.log(payload);
   switch (type) {
     case LOGIN_DOCTOR:
-      localStorage.setItem("user", {
-        username: payload.username,
-        account_type: "doctor",
-      });
+      localStorage.setItem("username", payload);
+      localStorage.setItem("account_type", "doctor");
       return {
         ...state,
         isLoggedIn: true,
-          user: {
-            username: payload.username,
-            account_type: "doctor"
-          },
+        user: { username: payload, account_type: "doctor" },
       };
     case LOGIN_PATIENT:
-      localStorage.setItem("user", {
-        username: payload.username,
-        account_type: "patient",
-      });
+      localStorage.setItem("username", payload);
+      localStorage.setItem("account_type", "patient");
       return {
         ...state,
         isLoggedIn: true,
-          user: {
-            username: payload.username,
-            account_type: "patient"
-          },
+        user: { username: payload, account_type: "patient" },
       };
     case LOGOUT:
-      localStorage.removeItem("user");
+      localStorage.removeItem("username");
+      localStorage.removeItem("account_type");
       return {
         ...state,
         isLoggedIn: false,
-          user: null,
+        user: null,
       };
     default:
       return state;

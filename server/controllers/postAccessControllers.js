@@ -16,11 +16,11 @@ const createPost = async (request, response) => {
 const updatePost = async (request, response) => {
   try {
     const post = await Post.findOne({
-      id: request.body.id
+      id: request.body.id,
     });
     if (post) {
       await post.updateOne({
-        $set: request.body
+        $set: request.body,
       });
       response.status(200).json("The post has been updated");
     } else {
@@ -32,10 +32,10 @@ const updatePost = async (request, response) => {
 };
 
 const deletePost = async (request, response) => {
-  console.log("post body", request.query['id']);
+  console.log("post body", request.query["id"]);
   try {
     const post = await Post.findOne({
-      id: request.query['id']
+      id: request.query["id"],
     });
     console.log(post.id);
     if (post) {
@@ -52,20 +52,20 @@ const deletePost = async (request, response) => {
 const likePost = async (request, response) => {
   try {
     const post = await Post.findOne({
-      id: request.body.id
+      id: request.body.id,
     });
     if (!post.likes.includes(request.body.username)) {
       await post.updateOne({
         $push: {
-          likes: request.body.username
-        }
+          likes: request.body.username,
+        },
       });
       response.status(200).json("The post has been liked");
     } else {
       await post.updateOne({
         $pull: {
-          likes: request.body.username
-        }
+          likes: request.body.username,
+        },
       });
       response.status(200).json("The post has been disliked");
     }
@@ -83,7 +83,7 @@ const timelinePostPatient = async (request, response) => {
     const doctorPosts = await Promise.all(
       currentPatient.following.map((DoctorUsername) => {
         return Post.find({
-          username: DoctorUsername
+          username: DoctorUsername,
         });
       })
     );
@@ -96,10 +96,10 @@ const timelinePostPatient = async (request, response) => {
 const timelinePostDoctor = async (request, response) => {
   try {
     const currentDoctor = await doctor.findOne({
-      username: request.body.username,
+      username: request.query.username,
     });
     const doctorPosts = await Post.find({
-      username: currentDoctor.username
+      username: currentDoctor.username,
     });
     response.json(doctorPosts);
   } catch (err) {
