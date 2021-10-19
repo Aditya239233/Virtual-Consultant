@@ -70,10 +70,14 @@ const patientLogin = async (request, response) => {
           statuscode: response.statusCode,
         });
       } else {
-        response.status(400).send({ message: "inccorect password" });
+        response.status(400).send({
+          message: "inccorect password"
+        });
       }
     } else {
-      response.status(400).send({ message: "user not found" });
+      response.status(400).send({
+        message: "user not found"
+      });
     }
   } catch (error) {
     response.json({
@@ -156,7 +160,7 @@ const followDoctor = async (request, response) => {
 };
 
 const sendConsultationRequest = (request, response) => {
-  console.log(request.body)
+  console.log("BODY", request.body)
   const new_consultation = new consultationRequest({
     type: request.body.type,
     severity_level: request.body.severity_level,
