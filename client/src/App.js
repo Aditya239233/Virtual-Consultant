@@ -9,6 +9,8 @@ import SignUpDoctor from "./pages/SignUpDoctor";
 import Consult from "./pages/Consult";
 import Messenger from "./pages/Messenger/Messenger";
 import LiveChat from "./pages/LiveChat/LiveChat";
+import PatientProfile from "./pages/Profile/PatientProfile"
+import DoctorProfile from "./pages/Profile/DoctorProfile";
 
 // Redux
 import { Provider } from "react-redux";
@@ -28,6 +30,8 @@ function App() {
           <Route path="/consult" exact component={Consult} />
           <Route path="/messenger" exact component={Messenger} />
           <Route path="/livechat" exact component={LiveChat} />
+          <Route path="/patientprofile" exact component={PatientProfile}/>
+          <Route path="/doctorprofile" exact component={DoctorProfile}/>
         </Switch>
       </Router>
     </Provider>
