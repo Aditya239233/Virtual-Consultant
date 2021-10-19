@@ -6,7 +6,8 @@ import { Person, Chat, Notifications, Search } from "@material-ui/icons";
 import { logout } from "../../redux/actions/auth";
 import "./navbar.css";
 
-const Navbar = ({ auth: { isLoggedIn } }) => {
+const Navbar = ({ auth: { isLoggedIn, user } }) => {
+
   const dispatch = useDispatch();
   const handleSubmit = () => {
     console.log("SUP");
@@ -45,10 +46,12 @@ const Navbar = ({ auth: { isLoggedIn } }) => {
           />
         </div>
       </div>
+
       <div className="topbarRight">
         <div className="topbarLinks">
           <span className="topbarLink"></span>
         </div>
+        <a href="http://localhost:3000/consult">Consultation</a>
         <div className="topbarIcons">
           <div className="topbarIconItem">
             <a href="http://localhost:3000/messenger">
@@ -65,7 +68,10 @@ const Navbar = ({ auth: { isLoggedIn } }) => {
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">
-            <Person className="personPicture" />
+            {user && user.account_type=="doctor"? <a href="/doctorprofile">
+            <Person className="personPicture" /></a> : <a href="/patientprofile">
+            <Person className="personPicture" /></a>}
+            
           </div>
         </div>
         <nav className="nav-button">
