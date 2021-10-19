@@ -6,6 +6,7 @@ import { KeyboardReturn, Call, Videocam } from "@material-ui/icons";
 import Message from "../../components/Message/Message";
 import axios from 'axios';
 import IconButton from '@material-ui/core/IconButton';
+import ReactDOM from "react-dom";
 
 const LiveChat = (props) => {
 const userProps=props.location.userProps
@@ -38,6 +39,13 @@ const handleSend = ()=>{
 
 const handleVideocall = () => {
   console.log("Videocalling now")
+  // axios.get('http://localhost:8000/video').then((result)=>{
+  //   console.log(result)
+  //   ReactDOM.render(result.data, document.getElementById('root'));
+  // }).catch(error=>{
+  //   console.log(error)
+  // })
+  window.open('http://localhost:8000/video')
 }
 
 useEffect(()=>{
