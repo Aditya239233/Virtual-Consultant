@@ -36,6 +36,10 @@ const handleSend = ()=>{
   })
 }
 
+const handleVideocall = () => {
+  console.log("Videocalling now")
+}
+
 useEffect(()=>{
   axios.get('http://localhost:8000/retrieveConversation',{
     params: {
@@ -81,10 +85,14 @@ useEffect(()=>{
               </p>
             </div>
             <div className="videoButton">
+              <IconButton onClick={handleVideocall} color="primary">
               <Videocam style={{ fontSize: 35 }} />
+              </IconButton>
             </div>
             <div className="callButton">
+            <IconButton color="primary">
               <Call style={{ fontSize: 40 }} />
+              </IconButton>
             </div>
           </div>
           <div className="d">
