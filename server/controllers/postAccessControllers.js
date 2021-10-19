@@ -50,6 +50,7 @@ const deletePost = async (request, response) => {
 };
 
 const likePost = async (request, response) => {
+  console.log(request.body);
   try {
     const post = await Post.findOne({
       id: request.body.id,
