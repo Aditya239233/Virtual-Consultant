@@ -76,7 +76,9 @@
     display: none;
   }
 }
-
+a:visited {
+  color: white;
+}
 .nav-button-link {
   border-radius: 50px;
   background: #01bf71;

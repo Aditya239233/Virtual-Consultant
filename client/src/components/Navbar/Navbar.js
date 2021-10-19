@@ -51,21 +51,28 @@ const Navbar = ({ auth: { isLoggedIn } }) => {
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">
+            <a href="http://localhost:3000/messenger">
+              <Chat className="chatNotification"></Chat>
+            </a>
+          </div>
+        </div>
+        <div className="topbarIcons">
+          <div className="topbarIconItem">
+            <Notifications className="notification"></Notifications>
+          </div>
+        </div>
+        <div className="topbarIcons">
+          <div className="topbarIconItem">
             <Person className="personPicture" />
           </div>
         </div>
-        <div className="topbarIcons">
-          <div className="topbarIconItem">
-            <Chat className="chatNotification" />
-          </div>
-        </div>
-        <div className="topbarIcons">
-          <div className="topbarIconItem">
-            <Notifications className="notification" />
-          </div>
-        </div>
         <nav className="nav-button">
-          <button onClick={handleSubmit} width={10} height={10}>
+          <button
+            onClick={handleSubmit}
+            width={10}
+            height={10}
+            className="nav-button-link"
+          >
             {" "}
             <a href="http://localhost:3000/" className="nav-button-link">
               Logout
