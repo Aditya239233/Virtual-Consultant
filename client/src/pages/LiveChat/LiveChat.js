@@ -5,11 +5,40 @@ import SideMenu from "../../components/SideMenuComponent/SideMenu";
 import { KeyboardReturn, Call, Videocam } from "@material-ui/icons";
 import Message from "../../components/Message/Message";
 import axios from 'axios';
+import IconButton from '@material-ui/core/IconButton';
 
-const LiveChat = () => {
+const LiveChat = (props) => {
+const userProps=props.location.userProps
+console.log(userProps)
 const [chats, setChats]=useState([]);
 const [username, setUsername]=useState('Shruthi')
-const [partner, setPartner]=useState('Arat')
+const [partner, setPartner]=useState(userProps.partner)
+const [ message, setMessage] = useState("")
+
+const handleSend = ()=>{
+  console.log(message)
+  const newMessage={
+    patientUsername:username,
+    doctorUsername:partner,
+    text:message,
+    sender:username,
+    timestamp:Date.now()
+  }
+  axios.post('http://localhost:8000/chat', newMessage
+  ).then((result)=>{
+      console.log(result.data)
+      const newChats=chats.concat(newMessage)
+      setChats(newChats);
+      setMessage("");
+  }).catch((error)=>{
+    console.log("Error happened")
+    console.log(error)
+  })
+}
+
+const handleVideocall = () => {
+  console.log("Videocalling now")
+}
 
 useEffect(()=>{
   axios.get('http://localhost:8000/retrieveConversation',{
@@ -40,7 +69,10 @@ useEffect(()=>{
         <div className="b">
           <div className="c">
             <div className="backButton">
+              {/* <KeyboardReturn style={{ fontSize: 35 }} /> */}
+              <IconButton href="/messenger" color="primary">
               <KeyboardReturn style={{ fontSize: 35 }} />
+              </IconButton>
             </div>
             <div className="chatPerson">
               <img
@@ -49,14 +81,18 @@ useEffect(()=>{
                 alt=""
               />
               <p className="chatName">
-                { username }
+                { partner }
               </p>
             </div>
             <div className="videoButton">
+              <IconButton onClick={handleVideocall} color="primary">
               <Videocam style={{ fontSize: 35 }} />
+              </IconButton>
             </div>
             <div className="callButton">
+            <IconButton color="primary">
               <Call style={{ fontSize: 40 }} />
+              </IconButton>
             </div>
           </div>
           <div className="d">
@@ -75,11 +111,12 @@ useEffect(()=>{
             }
           </div>
           <div className="e">
-            <textarea
+            <input
               className="chatInputBox"
               placeholder="Write something here...."
-            ></textarea>
-            <button className="sendButton">
+              value={message}
+              onChange={(e) =>{ setMessage(e.target.value)}}></input>
+            <button className="sendButton" onClick={handleSend}>
               <p className="Send">Send</p>
             </button>
           </div>
