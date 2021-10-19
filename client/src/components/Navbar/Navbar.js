@@ -1,26 +1,22 @@
 import React, { Fragment } from "react";
 import { Link as LinkR } from "react-router-dom";
-import { Link as LinkS } from "react-scroll";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Person, Chat, Notifications, Search } from "@material-ui/icons";
+import { logout } from "../../redux/actions/auth";
 import "./navbar.css";
 
 const Navbar = ({ auth: { isLoggedIn } }) => {
+  const dispatch = useDispatch();
+  const handleSubmit = () => {
+    console.log("SUP");
+    dispatch(logout());
+  };
   const guestLinks = (
     <>
-      <ul className="nav-menu">
-        <li className="nav-item">
-          <LinkS to="/about" className="nav-links">
-            About
-          </LinkS>
-        </li>
-        <li className="nav-item">
-          <LinkS to="/services" className="nav-links">
-            Services
-          </LinkS>
-        </li>
-      </ul>
+      <LinkR to="/" className="logo">
+        Virtual Consultant
+      </LinkR>
       <nav className="nav-button">
         <LinkR className="nav-button-link" to="/login">
           Sign In
@@ -31,10 +27,13 @@ const Navbar = ({ auth: { isLoggedIn } }) => {
 
   const authLinks = (
     <>
+      <LinkR to="/feed" className="logo">
+        Virtual Consultant
+      </LinkR>
       <div
         className="topbarCenter"
         style={{
-          paddingTop: "20px",
+          paddingTop: "25px",
           paddingLeft: "20px",
         }}
       >
@@ -65,15 +64,22 @@ const Navbar = ({ auth: { isLoggedIn } }) => {
             <Notifications className="notification" />
           </div>
         </div>
+        <nav className="nav-button">
+          <button onClick={handleSubmit} width={10} height={10}>
+            {" "}
+            <a href="http://localhost:3000/" className="nav-button-link">
+              Logout
+            </a>
+          </button>
+          {/* <LinkR className="nav-button-link" onSubmit={handleSubmit} to="/"> */}
+          {/* </LinkR> */}
+        </nav>
       </div>
     </>
   );
   return (
     <nav className="navbar">
       <div className="navbar-container topbarLeft">
-        <LinkR to="/" className="logo">
-          Virtual Consultant
-        </LinkR>
         {isLoggedIn ? authLinks : guestLinks}
       </div>
     </nav>

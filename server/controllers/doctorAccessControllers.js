@@ -6,6 +6,7 @@ const fs = require("fs");
 const { v4: uuidV4 } = require("uuid");
 
 const doctorRegister = async (request, response) => {
+  console.log(request.body);
   try {
     const doctorExists = await doctor.findOne({
       medical_id: request.body.medical_id,
@@ -18,7 +19,10 @@ const doctorRegister = async (request, response) => {
   }
   var doctorValid = false;
   try {
-    const data = fs.readFileSync("../scraping/doctors.txt", "utf-8");
+    const data = fs.readFileSync(
+      "/Users/aditya/Desktop/workspace/school/Virtual-Consultant/server/scraping/doctors.txt",
+      "utf-8"
+    );
     const lines = data.split(/\r?\n/);
     lines.forEach((line) => {
       var temp_name = request.body.first_name + " " + request.body.last_name;

@@ -24,10 +24,15 @@ const SignUpDoctor = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
+    const data = formData;
+    console.log(data);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
     axios
-      .post("/registerdoctor", data)
+      .post("/registerdoctor", data, config)
       .then((res) => {
         if (res.status === 200) setSignedUp(true);
       })
@@ -95,6 +100,7 @@ const SignUpDoctor = () => {
               label="specialization"
               name="specialization"
               autoComplete="specialization"
+              onChange={(e) => onChange(e)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -115,7 +121,7 @@ const SignUpDoctor = () => {
               fullWidth
               name="confirm_password"
               label="confirm_password"
-              type="confirm_password"
+              type="password"
               id="confirm_password"
               autoComplete="confirm password"
               onChange={(e) => onChange(e)}
@@ -125,7 +131,7 @@ const SignUpDoctor = () => {
             <TextField
               required
               fullWidth
-              name="Medical ID"
+              name="medical_id"
               label="medical_id"
               type="Medical ID"
               id="medical_id"
