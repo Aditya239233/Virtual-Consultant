@@ -58,7 +58,9 @@ const Navbar = ({ auth: { isLoggedIn } }) => {
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">
+          <a href="http://localhost:3000/notifications">
             <Notifications className="notification"></Notifications>
+            </a>
           </div>
         </div>
         <div className="topbarIcons">

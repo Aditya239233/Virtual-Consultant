@@ -9,7 +9,7 @@ import SignUpDoctor from "./pages/SignUpDoctor";
 import Consult from "./pages/Consult";
 import Messenger from "./pages/Messenger/Messenger";
 import LiveChat from "./pages/LiveChat/LiveChat";
-
+import Notification from "./pages/Notifications/Notification";
 // Redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
@@ -28,6 +28,7 @@ function App() {
           <Route path="/consult" exact component={Consult} />
           <Route path="/messenger" exact component={Messenger} />
           <Route path="/livechat" exact component={LiveChat} />
+          <Route path="/notifications" exact component={Notification} />
         </Switch>
       </Router>
     </Provider>

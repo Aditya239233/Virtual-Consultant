@@ -7,7 +7,7 @@ import Message from "../../components/Message/Message";
 import axios from "axios";
 const Messenger = () => {
   const [previews, setPreviews] = useState([]);
-  const [username, setUsername] = useState("Shruthi");
+  const [username, setUsername] = useState("try");
 
   useEffect(() => {
     axios
@@ -34,11 +34,11 @@ const Messenger = () => {
     <>
       <Navbar />
       <div className="messenger">
-        <div className="chatMenu">
+        {/* <div className="chatMenu">
           <div className="chatMenuWrapper">
             <SideMenu />
           </div>
-        </div>
+        </div> */}
         <div className="activeChat">
           <div className="activeChatWrapper">
             {previews.map((preview) => {

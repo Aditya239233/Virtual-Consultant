@@ -70,9 +70,9 @@ useEffect(()=>{
     <>
       <Navbar />
       <div className="wrapper">
-        <div className="a">
+        {/* <div className="a">
           <SideMenu />
-        </div>
+        </div> */}
 
         <div className="b">
           <div className="c">

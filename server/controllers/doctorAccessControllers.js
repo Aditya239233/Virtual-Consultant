@@ -134,21 +134,25 @@ const viewNotifications = async (request, response) => {
   for (let i = 0; i < consultation_requests.length; i++) {
     severity = consultation_requests[i].severity_level;
     timestamp = consultation_requests[i].timestamp;
-    let diffMilli = Date.now() - timestamp;
+    var today = new Date(Date.now() * 1000);
+    let diffMilli = today - timestamp;
+    console.log(today)
     var diffMins = Math.round(((diffMilli % 86400000) % 3600000) / 60000);
-    console.log(diffMins);
     if (severity == "High") {
       if (diffMins < 10) {
+        console.log("High",diffMins);
         filtered_requests.push(consultation_requests[i]);
       }
     }
     if (severity == "Medium") {
       if (diffMins < 20) {
+        console.log("Medium",diffMins);
         filtered_requests.push(consultation_requests[i]);
       }
     }
     if (severity == "Low") {
       if (diffMins < 30) {
+        console.log("Low",diffMins);
         filtered_requests.push(consultation_requests[i]);
       }
     }
@@ -164,7 +168,9 @@ const acceptConsultationRequest = async (request, response) => {
     _id: ObjectId(request.body.id),
   });
   console.log(accepted_request);
-  response.redirect(`/${uuidV4()}`);
+  response.json({
+    status: response.statusCode
+  });
 };
 
 module.exports = {

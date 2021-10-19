@@ -51,9 +51,9 @@ const ConsultForm =  () => {
           Select Type of Problem:
           <select value= {type} onChange={handleChangeType} required>
             <option value="">Select Problem Type</option>
-            <option value="flu">Flu</option>
-            <option value="heart disease">Heart Disease</option>
-            <option value="mental">Mental Related</option>
+            <option value="flu">Gynaecology</option>
+            <option value="heart disease">Cardiology</option>
+            <option value="mental">Paediatrics</option>
             <option value="others">Others, please describe below</option>
           </select>
         </label>
