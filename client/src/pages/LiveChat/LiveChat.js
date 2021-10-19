@@ -5,11 +5,14 @@ import SideMenu from "../../components/SideMenuComponent/SideMenu";
 import { KeyboardReturn, Call, Videocam } from "@material-ui/icons";
 import Message from "../../components/Message/Message";
 import axios from 'axios';
+import IconButton from '@material-ui/core/IconButton';
 
-const LiveChat = () => {
+const LiveChat = (props) => {
+const userProps=props.location.userProps
+console.log(userProps)
 const [chats, setChats]=useState([]);
 const [username, setUsername]=useState('Shruthi')
-const [partner, setPartner]=useState('Arat')
+const [partner, setPartner]=useState(userProps.partner)
 
 useEffect(()=>{
   axios.get('http://localhost:8000/retrieveConversation',{
@@ -40,7 +43,10 @@ useEffect(()=>{
         <div className="b">
           <div className="c">
             <div className="backButton">
+              {/* <KeyboardReturn style={{ fontSize: 35 }} /> */}
+              <IconButton href="/messenger" color="primary">
               <KeyboardReturn style={{ fontSize: 35 }} />
+              </IconButton>
             </div>
             <div className="chatPerson">
               <img
@@ -49,7 +55,7 @@ useEffect(()=>{
                 alt=""
               />
               <p className="chatName">
-                { username }
+                { partner }
               </p>
             </div>
             <div className="videoButton">
