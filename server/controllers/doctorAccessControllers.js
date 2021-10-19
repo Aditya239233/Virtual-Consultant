@@ -105,6 +105,7 @@ const doctorLogin = async (request, response) => {
 };
 
 const viewDoctorProfile = async (request, response) => {
+  console.log(request.query["username"]);
   const doctor_doc = await doctor.findOne({
     username: request.query["username"],
   });
@@ -131,15 +132,15 @@ const viewNotifications = async (request, response) => {
     type: request.query["type"],
   });
   let filtered_requests = [];
-  console.log(consultation_requests.length)
+  console.log(consultation_requests.length);
   for (let i = 0; i < consultation_requests.length; i++) {
     severity = consultation_requests[i].severity_level;
-    timestamp = Math.round(consultation_requests[i].timestamp.getTime()/1000);
-    today=Math.round(Date.now()/1000);
+    timestamp = Math.round(consultation_requests[i].timestamp.getTime() / 1000);
+    today = Math.round(Date.now() / 1000);
     let diffSeconds = today - timestamp;
-    console.log(today)
-    console.log("Hello")
-    console.log(timestamp)
+    console.log(today);
+    console.log("Hello");
+    console.log(timestamp);
     //var diffMins = Math.round(((diffMilli % 86400000) % 3600000) / 60000);
     if (severity == "High") {
       if (diffSeconds < 600) {
@@ -169,7 +170,7 @@ const acceptConsultationRequest = async (request, response) => {
   });
   console.log(accepted_request);
   response.json({
-    status: response.statusCode
+    status: response.statusCode,
   });
 };
 

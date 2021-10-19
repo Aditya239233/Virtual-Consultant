@@ -6,7 +6,7 @@ const account_type = localStorage.getItem("account_type");
 const initialState =
   username && account_type
     ? { isLoggedIn: true, user: { username, account_type } }
-    : { isLoggedIn: false, user: null };
+    : { isLoggedIn: false, user: { username, account_type } };
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {

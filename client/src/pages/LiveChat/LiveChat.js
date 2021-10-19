@@ -1,85 +1,82 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./liveChat.css";
 import Navbar from "../../components/Navbar/Navbar";
-import SideMenu from "../../components/SideMenuComponent/SideMenu";
 import { KeyboardReturn, Call, Videocam } from "@material-ui/icons";
 import Message from "../../components/Message/Message";
-import axios from 'axios';
-import IconButton from '@material-ui/core/IconButton';
-import ReactDOM from "react-dom";
+import axios from "axios";
+import IconButton from "@material-ui/core/IconButton";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-const LiveChat = (props) => {
-const userProps=props.location.userProps
-console.log(userProps)
-const [chats, setChats]=useState([]);
-const [username, setUsername]=useState('Shruthi')
-const [partner, setPartner]=useState(userProps.partner)
-const [ message, setMessage] = useState("")
+const LiveChat = (props, { auth: { user } }) => {
+  const userProps = props.location.userProps;
+  console.log(userProps);
+  const [chats, setChats] = useState([]);
+  const username = user.username;
+  const partner = userProps.partner;
+  const [message, setMessage] = useState("");
 
-const handleSend = ()=>{
-  console.log(message)
-  const newMessage={
-    patientUsername:username,
-    doctorUsername:partner,
-    text:message,
-    sender:username,
-    timestamp:Date.now()
-  }
-  axios.post('http://localhost:8000/chat', newMessage
-  ).then((result)=>{
-      console.log(result.data)
-      const newChats=chats.concat(newMessage)
-      setChats(newChats);
-      setMessage("");
-  }).catch((error)=>{
-    console.log("Error happened")
-    console.log(error)
-  })
-}
+  const handleSend = () => {
+    console.log(message);
+    const newMessage = {
+      patientUsername: username,
+      doctorUsername: partner,
+      text: message,
+      sender: username,
+      timestamp: Date.now(),
+    };
+    axios
+      .post("http://localhost:8000/chat", newMessage)
+      .then((result) => {
+        console.log(result.data);
+        const newChats = chats.concat(newMessage);
+        setChats(newChats);
+        setMessage("");
+      })
+      .catch((error) => {
+        console.log("Error happened");
+        console.log(error);
+      });
+  };
 
-const handleVideocall = () => {
-  console.log("Videocalling now")
-  // axios.get('http://localhost:8000/video').then((result)=>{
-  //   console.log(result)
-  //   ReactDOM.render(result.data, document.getElementById('root'));
-  // }).catch(error=>{
-  //   console.log(error)
-  // })
-  window.open('http://localhost:8000/video')
-}
+  const handleVideocall = () => {
+    console.log("Videocalling now");
+    window.open("http://localhost:8000/video");
+  };
 
-useEffect(()=>{
-  axios.get('http://localhost:8000/retrieveConversation',{
-    params: {
-      username1:username,
-      username2:partner
-    },
-    headers: {"Access-Control-Allow-Origin": "*", 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;application/json'},
-    
-  }).then(response=>{
-    console.log(response)
-    setChats(response.data.chat_messages)
-  }).catch(err=>{
-    console.log("Error happened")
-    console.log(err)
-  })
-},[])
-
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/retrieveConversation", {
+        params: {
+          username1: username,
+          username2: partner,
+        },
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type":
+            "application/x-www-form-urlencoded; charset=UTF-8;application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setChats(response.data.chat_messages);
+      })
+      .catch((err) => {
+        console.log("Error happened");
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
       <Navbar />
       <div className="wrapper">
-        {/* <div className="a">
-          <SideMenu />
-        </div> */}
-
         <div className="b">
           <div className="c">
             <div className="backButton">
               {/* <KeyboardReturn style={{ fontSize: 35 }} /> */}
               <IconButton href="/messenger" color="primary">
-              <KeyboardReturn style={{ fontSize: 35 }} />
+                <KeyboardReturn style={{ fontSize: 35 }} />
               </IconButton>
             </div>
             <div className="chatPerson">
@@ -88,42 +85,46 @@ useEffect(()=>{
                 src="/assets/Post/Passport photo.jpg"
                 alt=""
               />
-              <p className="chatName">
-                { partner }
-              </p>
+              <p className="chatName">{partner}</p>
             </div>
             <div className="videoButton">
               <IconButton onClick={handleVideocall} color="primary">
-              <Videocam style={{ fontSize: 35 }} />
+                <Videocam style={{ fontSize: 35 }} />
               </IconButton>
             </div>
             <div className="callButton">
-            <IconButton color="primary">
-              <Call style={{ fontSize: 40 }} />
+              <IconButton color="primary">
+                <Call style={{ fontSize: 40 }} />
               </IconButton>
             </div>
           </div>
           <div className="d">
-            {/* <div className="chatReceive">
-              <Message sender="Khush" text="I am fine" date="16/10/2021" time="11:10pm"/>
-            </div>
-            <div className="chatSend">
-            <Message sender="Adi" text="Nice" date="16/10/2021" time="11:15pm"/>
-            </div> */}
-            {
-              chats.map((chat)=>{
-                return <div className={chat.sender==username? "chatSend":"chatReceive"}>
-                  <Message sender={chat.sender} text={chat.text} timestamp={chat.timestamp} username={username}/>
-                  </div>
-              })
-            }
+            {chats.map((chat) => {
+              return (
+                <div
+                  className={
+                    chat.sender == username ? "chatSend" : "chatReceive"
+                  }
+                >
+                  <Message
+                    sender={chat.sender}
+                    text={chat.text}
+                    timestamp={chat.timestamp}
+                    username={username}
+                  />
+                </div>
+              );
+            })}
           </div>
           <div className="e">
             <input
               className="chatInputBox"
               placeholder="Write something here...."
               value={message}
-              onChange={(e) =>{ setMessage(e.target.value)}}></input>
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
+            ></input>
             <button className="sendButton" onClick={handleSend}>
               <p className="Send">Send</p>
             </button>
@@ -134,4 +135,12 @@ useEffect(()=>{
   );
 };
 
-export default LiveChat;
+LiveChat.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {})(LiveChat);

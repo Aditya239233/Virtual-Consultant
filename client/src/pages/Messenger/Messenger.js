@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./messenger.css";
 import Navbar from "../../components/Navbar/Navbar";
-import SideMenu from "../../components/SideMenuComponent/SideMenu";
 import MessagePreview from "../../components/MessagePreview/MessagePreview";
-import Message from "../../components/Message/Message";
 import axios from "axios";
-const Messenger = () => {
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+const Messenger = ({ auth: { user } }) => {
   const [previews, setPreviews] = useState([]);
-  const [username, setUsername] = useState("try");
+  const username = user.username;
 
   useEffect(() => {
     axios
@@ -34,25 +35,22 @@ const Messenger = () => {
     <>
       <Navbar />
       <div className="messenger">
-        {/* <div className="chatMenu">
-          <div className="chatMenuWrapper">
-            <SideMenu />
-          </div>
-        </div> */}
         <div className="activeChat">
           <div className="activeChatWrapper">
-            {previews.map((preview) => {
-              return (
-                <MessagePreview
-                  id={preview.timestamp}
-                  name={preview.name}
-                  sender={preview.sender}
-                  timestamp={preview.timestamp}
-                  preview_text={preview.preview_text}
-                  username={username}
-                />
-              );
-            })}
+            {previews.length
+              ? previews.map((preview) => {
+                  return (
+                    <MessagePreview
+                      id={preview.timestamp}
+                      name={preview.name}
+                      sender={preview.sender}
+                      timestamp={preview.timestamp}
+                      preview_text={preview.preview_text}
+                      username={username}
+                    />
+                  );
+                })
+              : "No Chat Found"}
           </div>
         </div>
       </div>
@@ -60,4 +58,12 @@ const Messenger = () => {
   );
 };
 
-export default Messenger;
+Messenger.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {})(Messenger);

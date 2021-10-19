@@ -7,10 +7,8 @@ import { logout } from "../../redux/actions/auth";
 import "./navbar.css";
 
 const Navbar = ({ auth: { isLoggedIn, user } }) => {
-
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    console.log("SUP");
     dispatch(logout());
   };
   const guestLinks = (
@@ -51,7 +49,9 @@ const Navbar = ({ auth: { isLoggedIn, user } }) => {
         <div className="topbarLinks">
           <span className="topbarLink"></span>
         </div>
-        <a href="http://localhost:3000/consult">Consultation</a>
+        {user.account_type === "patient" ? (
+          <a href="http://localhost:3000/consult">Consultation</a>
+        ) : null}
         <div className="topbarIcons">
           <div className="topbarIconItem">
             <a href="http://localhost:3000/messenger">
@@ -59,19 +59,27 @@ const Navbar = ({ auth: { isLoggedIn, user } }) => {
             </a>
           </div>
         </div>
-        <div className="topbarIcons">
-          <div className="topbarIconItem">
-          <a href="http://localhost:3000/notifications">
-            <Notifications className="notification"></Notifications>
-            </a>
+        {user.account_type === "doctor" ? (
+          <div className="topbarIcons">
+            <div className="topbarIconItem">
+              <a href="http://localhost:3000/notifications">
+                <Notifications className="notification"></Notifications>
+              </a>
+            </div>
           </div>
-        </div>
+        ) : null}
+
         <div className="topbarIcons">
           <div className="topbarIconItem">
-            {user && user.account_type=="doctor"? <a href="/doctorprofile">
-            <Person className="personPicture" /></a> : <a href="/patientprofile">
-            <Person className="personPicture" /></a>}
-            
+            {user && user.account_type === "doctor" ? (
+              <a href="/doctorprofile">
+                <Person className="personPicture" />
+              </a>
+            ) : (
+              <a href="/patientprofile">
+                <Person className="personPicture" />
+              </a>
+            )}
           </div>
         </div>
         <nav className="nav-button">

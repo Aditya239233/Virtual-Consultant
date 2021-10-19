@@ -18,6 +18,7 @@ const SignUpDoctor = () => {
     medical_id: "",
     specialization: "",
   });
+  const [type, setType] = React.useState("Choose option");
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,6 +43,10 @@ const SignUpDoctor = () => {
   if (signedUp) {
     return <Redirect to="/login" />;
   }
+
+  const handleChangeType = (event) => {
+    setType(event.target.value);
+  };
 
   return (
     <form className="form" onSubmit={(e) => handleSubmit(e)}>
@@ -93,15 +98,13 @@ const SignUpDoctor = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              id="specialization"
-              label="specialization"
-              name="specialization"
-              autoComplete="specialization"
-              onChange={(e) => onChange(e)}
-            />
+            <select value={type} onChange={handleChangeType} required>
+              <option value="">Select Problem Type</option>
+              <option value="flu">Gynaecology</option>
+              <option value="heart disease">Cardiology</option>
+              <option value="mental">Paediatrics</option>
+              <option value="others">Others, please describe below</option>
+            </select>
           </Grid>
           <Grid item xs={12}>
             <TextField

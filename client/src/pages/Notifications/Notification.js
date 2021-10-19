@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "./notification.css";
 import Navbar from "../../components/Navbar/Navbar";
-import SideMenu from "../../components/SideMenuComponent/SideMenu";
 import ConsultationPreview from "../../components/ConsultationPreview/ConsultationPreview";
-import Message from "../../components/Message/Message";
 import axios from "axios";
-const Notification = () => {
-  const [consultationRequests, setConsultationRequests] = useState([]);
-  const [username, setUsername] = useState("try");
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-  useEffect(async() => {
-      const info = await axios.get("/viewdoctorprofile",{params: {
+const Notification = ({ auth: { user } }) => {
+  const [consultationRequests, setConsultationRequests] = useState([]);
+  const username = user.username;
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    const info = await axios.get("/viewdoctorprofile", {
+      params: {
         username: username,
-        },});
-        const specialization=info.data.specialization;
+      },
+    });
+    const specialization = info.data.specialization;
     axios
       .get("http://localhost:8000/viewNotifications", {
         params: {
-          type:"Gynaecology",
+          type: specialization,
         },
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -38,15 +42,10 @@ const Notification = () => {
     <>
       <Navbar />
       <div className="messenger">
-        {/* <div className="chatMenu">
-          <div className="chatMenuWrapper">
-            <SideMenu />
-          </div>
-        </div> */}
         <div className="activeChat">
           <div className="activeChatWrapper">
             {consultationRequests.map((request) => {
-              console.log(request._id)
+              console.log(request._id);
               return (
                 <ConsultationPreview
                   id={request._id}
@@ -56,10 +55,8 @@ const Notification = () => {
                   text={request.text}
                   timestamp={request.timestamp}
                 />
-                
               );
             })}
-
           </div>
         </div>
       </div>
@@ -67,4 +64,12 @@ const Notification = () => {
   );
 };
 
-export default Notification;
+Notification.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {})(Notification);

@@ -18,6 +18,7 @@ const Share = ({ auth: { user } }) => {
 
   const handlePost = (event) => {
     const data = formData;
+    data.id = uuid();
 
     const config = {
       headers: {

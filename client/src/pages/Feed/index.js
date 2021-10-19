@@ -14,7 +14,7 @@ const Feed = ({ auth: { user } }) => {
     if (user.account_type === "patient") {
       const post = await axios.get("/patienttimeline", {
         params: {
-          username: "user1",
+          username: user.username,
         },
       });
       setPosts(post);
@@ -22,7 +22,7 @@ const Feed = ({ auth: { user } }) => {
     } else {
       const post = await axios.get("/doctortimeline", {
         params: {
-          username: "new",
+          username: user.username,
         },
       });
       setPosts(post);
@@ -42,7 +42,7 @@ const Feed = ({ auth: { user } }) => {
                   return <Post post={post} key={post.id} />;
                 });
               }
-              return <Post post={users} key={users.id} />;
+              return null;
             })
           : "No posts to show"}
       </div>
