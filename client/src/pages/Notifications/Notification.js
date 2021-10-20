@@ -54,6 +54,7 @@ const Notification = ({ auth: { user } }) => {
                   sender={request.sender}
                   text={request.text}
                   timestamp={request.timestamp}
+                  username={user.username}
                 />
               );
             })}

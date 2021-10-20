@@ -85,9 +85,9 @@ const retrieveConversation = async (request, response) => {
   if (chat_doc.length > 0) {
     text_messages = chat_doc[0].text_messages;
     console.log(text_messages);
-    text_messages = text_messages.sort((a, b) =>
-      a.timestamp > new Date(b.timestamp) ? 1 : -1
-    );
+    // text_messages = text_messages.sort((a, b) =>
+    //   a.timestamp > new Date(b.timestamp) ? 1 : -1
+    // );
     console.log(text_messages);
     response.json({
       status: response.statusCode,
@@ -101,9 +101,9 @@ const retrieveConversation = async (request, response) => {
     if (chat_doc.length > 0) {
       text_messages = chat_doc[0].text_messages;
       console.log(text_messages);
-      text_messages = text_messages.sort((a, b) =>
-        a.timestamp > new Date(b.timestamp) ? 1 : -1
-      );
+      //   text_messages = text_messages.sort((a, b) =>
+      //     a.timestamp > new Date(b.timestamp) ? 1 : -1
+      //   );
       console.log(text_messages);
       response.json({
         status: response.statusCode,

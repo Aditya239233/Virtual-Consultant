@@ -132,6 +132,7 @@ const viewNotifications = async (request, response) => {
   const consultation_requests = await consultationRequest.find({
     type: request.query["type"],
   });
+  console.log(request.query);
   let filtered_requests = [];
   console.log(consultation_requests.length);
   for (let i = 0; i < consultation_requests.length; i++) {
@@ -139,9 +140,7 @@ const viewNotifications = async (request, response) => {
     timestamp = Math.round(consultation_requests[i].timestamp.getTime() / 1000);
     today = Math.round(Date.now() / 1000);
     let diffSeconds = today - timestamp;
-    console.log(today);
-    console.log("Hello");
-    console.log(timestamp);
+    console.log(consultation_requests[i]);
     //var diffMins = Math.round(((diffMilli % 86400000) % 3600000) / 60000);
     if (severity == "High") {
       if (diffSeconds < 600) {

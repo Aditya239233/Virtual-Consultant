@@ -5,13 +5,13 @@ import axios from "axios";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-const MessagePreview = (props, { auth: { user } }) => {
+const MessagePreview = (props) => {
   const handleAccept = () => {
     console.log(props.id);
     axios
       .post("/chat", {
         patientUsername: props.sender,
-        doctorUsername: user.username,
+        doctorUsername: props.username,
         text: props.text + " " + "Severity level: " + props.severity_level,
         sender: props.sender,
       })
@@ -51,12 +51,4 @@ const MessagePreview = (props, { auth: { user } }) => {
   );
 };
 
-MessagePreview.propTypes = {
-  auth: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStateToProps, {})(MessagePreview);
+export default MessagePreview;
