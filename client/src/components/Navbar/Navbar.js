@@ -2,7 +2,13 @@ import React, { Fragment } from "react";
 import { Link as LinkR } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect, useDispatch } from "react-redux";
-import { Person, Chat, Notifications, Search } from "@material-ui/icons";
+import {
+  Person,
+  Chat,
+  Notifications,
+  Search,
+  LocalHospital,
+} from "@material-ui/icons";
 import { logout } from "../../redux/actions/auth";
 import "./navbar.css";
 
@@ -50,7 +56,9 @@ const Navbar = ({ auth: { isLoggedIn, user } }) => {
           <span className="topbarLink"></span>
         </div>
         {user.account_type === "patient" ? (
-          <a href="http://localhost:3000/consult">Consultation</a>
+          <a href="http://localhost:3000/consult">
+            <LocalHospital />
+          </a>
         ) : null}
         <div className="topbarIcons">
           <div className="topbarIconItem">

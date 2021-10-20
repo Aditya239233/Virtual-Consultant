@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 
 const Messenger = ({ auth: { user } }) => {
   const [previews, setPreviews] = useState([]);
-  const username = user.username;
+  const username = "Shruthi";
 
   useEffect(() => {
     axios

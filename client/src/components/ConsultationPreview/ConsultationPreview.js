@@ -11,7 +11,7 @@ const MessagePreview = (props, { auth: { user } }) => {
     axios
       .post("/chat", {
         patientUsername: props.sender,
-        doctorUsername: "try",
+        doctorUsername: user.username,
         text: props.text + " " + "Severity level: " + props.severity_level,
         sender: props.sender,
       })

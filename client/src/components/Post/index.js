@@ -1,6 +1,7 @@
 import "./index.css";
 import axios from "axios";
 import { useState } from "react";
+import { Delete } from "@material-ui/icons";
 
 async function d(p) {
   console.log("hello", p);
@@ -8,6 +9,8 @@ async function d(p) {
     params: { id: p },
   });
   console.log(k);
+  alert("Post has been deleted");
+  window.location.reload(true);
 }
 const Post = (post) => {
   const handleLike = () => {
@@ -34,7 +37,7 @@ const Post = (post) => {
             <span className="postDate"> 5 mins ago</span>
           </div>
           <div className="postTopRight">
-            <button onClick={() => d(post["post"]["id"])}>Delete</button>
+            <Delete onClick={() => d(post["post"]["id"])} />
           </div>
         </div>
         <div className="postCenter">

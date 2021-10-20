@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./liveChat.css";
 import Navbar from "../../components/Navbar/Navbar";
 import { KeyboardReturn, Call, Videocam } from "@material-ui/icons";
@@ -8,11 +8,11 @@ import IconButton from "@material-ui/core/IconButton";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-const LiveChat = (props, { auth: { user } }) => {
+const LiveChat = (props) => {
   const userProps = props.location.userProps;
   console.log(userProps);
   const [chats, setChats] = useState([]);
-  const username = user.username;
+  const username = "Shruthi";
   const partner = userProps.partner;
   const [message, setMessage] = useState("");
 
@@ -69,7 +69,6 @@ const LiveChat = (props, { auth: { user } }) => {
 
   return (
     <>
-      <Navbar />
       <div className="wrapper">
         <div className="b">
           <div className="c">
@@ -80,21 +79,11 @@ const LiveChat = (props, { auth: { user } }) => {
               </IconButton>
             </div>
             <div className="chatPerson">
-              <img
-                className="chatPhoto"
-                src="/assets/Post/Passport photo.jpg"
-                alt=""
-              />
               <p className="chatName">{partner}</p>
             </div>
             <div className="videoButton">
               <IconButton onClick={handleVideocall} color="primary">
                 <Videocam style={{ fontSize: 35 }} />
-              </IconButton>
-            </div>
-            <div className="callButton">
-              <IconButton color="primary">
-                <Call style={{ fontSize: 40 }} />
               </IconButton>
             </div>
           </div>
@@ -125,7 +114,11 @@ const LiveChat = (props, { auth: { user } }) => {
                 setMessage(e.target.value);
               }}
             ></input>
-            <button className="sendButton" onClick={handleSend}>
+            <button
+              className="sendButton"
+              onClick={handleSend}
+              disabled={!message}
+            >
               <p className="Send">Send</p>
             </button>
           </div>
@@ -135,12 +128,4 @@ const LiveChat = (props, { auth: { user } }) => {
   );
 };
 
-LiveChat.propTypes = {
-  auth: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStateToProps, {})(LiveChat);
+export default LiveChat;

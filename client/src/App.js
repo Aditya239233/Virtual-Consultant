@@ -10,7 +10,7 @@ import Consult from "./pages/Consult";
 import Messenger from "./pages/Messenger/Messenger";
 import LiveChat from "./pages/LiveChat/LiveChat";
 import Notification from "./pages/Notifications/Notification";
-import PatientProfile from "./pages/Profile/PatientProfile"
+import PatientProfile from "./pages/Profile/PatientProfile";
 import DoctorProfile from "./pages/Profile/DoctorProfile";
 
 // Redux
@@ -32,8 +32,8 @@ function App() {
           <Route path="/messenger" exact component={Messenger} />
           <Route path="/livechat" exact component={LiveChat} />
           <Route path="/notifications" exact component={Notification} />
-          <Route path="/patientprofile" exact component={PatientProfile}/>
-          <Route path="/doctorprofile" exact component={DoctorProfile}/>
+          <Route path="/patientprofile" exact component={PatientProfile} />
+          <Route path="/doctorprofile" exact component={DoctorProfile} />
         </Switch>
       </Router>
     </Provider>

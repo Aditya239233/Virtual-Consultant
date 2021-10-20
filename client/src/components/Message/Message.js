@@ -2,18 +2,12 @@ import React from "react";
 import "./message.css";
 
 export default function Message(props) {
+  const messageClass = props.username === props.sender ? "sent" : "received";
   return (
     <>
-      <div className="message">
-        <div className="messageTop">
-          <p className="sender">
-          {props.sender==props.username? "You":props.sender} <br />
-          </p>
-          <p className="defaultMsg">{ props.text }</p>
-        </div>
-        <div className="messageDateTime">
-          <div className="messageDate">{ props.timestamp }</div>
-        </div>
+      <div className={`message ${messageClass}`}>
+        <img src={"https://api.adorable.io/avatars/23/abott@adorable.png"} />
+        <p>{props.text}</p>
       </div>
     </>
   );

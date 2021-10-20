@@ -39,10 +39,15 @@ const Feed = ({ auth: { user } }) => {
               console.log(users);
               if (users.length) {
                 return users.map((post) => {
-                  return <Post post={post} key={post.id} />;
+                  return (
+                    <>
+                      <div className="new"></div>
+                      <Post post={post} key={post.id} />
+                    </>
+                  );
                 });
               }
-              return null;
+              return <Post post={users} key={users.id} />;
             })
           : "No posts to show"}
       </div>
