@@ -76,9 +76,7 @@
     display: none;
   }
 }
-topbarLink::a:visited {
-  color: white;
-}
+
 .nav-button-link {
   border-radius: 50px;
   background: #01bf71;
@@ -130,6 +128,7 @@ topbarLink::a:visited {
   align-items: center;
   justify-content: space-around;
 }
+
 .topbarLink {
   margin-right: 10px;
   font-size: 14;
@@ -171,4 +170,8 @@ topbarLink::a:visited {
 
 .topbarLeft {
   flex: 3;
+}
+
+a.links:visited {
+  color: white;
 }

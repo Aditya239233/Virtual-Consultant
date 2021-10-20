@@ -92,9 +92,10 @@ const LiveChat = (props) => {
               return (
                 <div
                   className={
-                    chat.sender === username ? "chatSend" : "chatReceive"
+                    chat.sender == username ? "chatSend" : "chatReceive"
                   }
                 >
+                  {console.log("USERNAME", username, chat.sender)}
                   <Message
                     sender={chat.sender}
                     text={chat.text}
