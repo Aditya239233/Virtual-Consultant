@@ -101,13 +101,13 @@
   padding-top: 100px;
 }
 .chatReceive {
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
 }
 .chatSend {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-end; */
 }
 
 .e {

@@ -4,9 +4,11 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import Attach from "../Attach/attach";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import axios from "axios";
-const ConsultForm = () => {
+
+const ConsultForm = ({ auth: { isLoggedIn, user } }) => {
   const [severity, setSeverity] = useState("Choose option");
   const [type, setType] = useState("Choose option");
   const [text, setText] = useState(" ");
@@ -21,7 +23,7 @@ const ConsultForm = () => {
         type: type,
         severity_level: severity,
         text: data.get("symptoms"),
-        sender: "user2",
+        sender: user.username,
       }
     );
     console.log("req", send_req);
@@ -87,4 +89,12 @@ const ConsultForm = () => {
   );
 };
 
-export default ConsultForm;
+ConsultForm.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {})(ConsultForm);
