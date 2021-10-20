@@ -117,6 +117,7 @@ const viewDoctorProfile = async (request, response) => {
       username: doctor_doc["username"],
       email: doctor_doc["email"],
       medical_id: doctor_doc["medical_id"],
+      specialization: doctor_doc["specialization"],
     });
   } else {
     response.json({

@@ -12,7 +12,7 @@ const LiveChat = (props) => {
   const userProps = props.location.userProps;
   console.log(userProps);
   const [chats, setChats] = useState([]);
-  const username = "Shruthi";
+  const username = userProps.user;
   const partner = userProps.partner;
   const [message, setMessage] = useState("");
 

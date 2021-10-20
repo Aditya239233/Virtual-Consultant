@@ -17,7 +17,10 @@ export default function MessagePreview(props) {
           </p>
           <p className="time">{props.timestamp}</p>
           <Link
-            to={{ pathname: "/livechat", userProps: { partner: props.name } }}
+            to={{
+              pathname: "/livechat",
+              userProps: { partner: props.name, user: props.username },
+            }}
             className="btn btn-primary"
           >
             View chat

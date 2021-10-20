@@ -41,7 +41,6 @@ const Feed = ({ auth: { user } }) => {
                 return users.map((post) => {
                   return (
                     <>
-                      <div className="new"></div>
                       <Post post={post} key={post.id} />
                     </>
                   );

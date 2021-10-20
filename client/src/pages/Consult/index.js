@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import ConsultForm from "../../components/Forms/ConsultForm";
-
+import { LocalHospitalRounded } from "@material-ui/icons";
 const theme = createTheme();
 
 const Consult = () => {
@@ -23,9 +23,7 @@ const Consult = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <LocalHospitalRounded />
           <Typography component="h1" variant="h5">
             Consultation Form
           </Typography>

@@ -100,9 +100,9 @@ const SignUpDoctor = () => {
           <Grid item xs={12}>
             <select value={type} onChange={handleChangeType} required>
               <option value="">Select Problem Type</option>
-              <option value="flu">Gynaecology</option>
-              <option value="heart disease">Cardiology</option>
-              <option value="mental">Paediatrics</option>
+              <option value="Gynaecology">Gynaecology</option>
+              <option value="Cardiology">Cardiology</option>
+              <option value="Paediatrics">Paediatrics</option>
               <option value="others">Others, please describe below</option>
             </select>
           </Grid>

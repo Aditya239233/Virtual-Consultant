@@ -104,6 +104,22 @@ const Profile = ({ auth: { user } }) => {
           {data["medical_id"]}
         </Grid>
       </Grid>
+      <Grid
+        container
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          paddingTop: 10,
+        }}
+      >
+        <Grid item xs={1}>
+          <b>Specialization:</b>
+        </Grid>
+        <Grid item xs={1}>
+          {data["specialization"]}
+        </Grid>
+      </Grid>
     </div>
   );
 };
