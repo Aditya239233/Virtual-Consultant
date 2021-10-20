@@ -132,8 +132,6 @@ const viewNotifications = async (request, response) => {
   const consultation_requests = await consultationRequest.find({
     type: request.query["type"],
   });
-  console.log(request.query);
-  let filtered_requests = [];
   console.log(consultation_requests.length);
   for (let i = 0; i < consultation_requests.length; i++) {
     severity = consultation_requests[i].severity_level;
@@ -161,7 +159,7 @@ const viewNotifications = async (request, response) => {
   }
   response.json({
     status: response.statusCode,
-    consultation_requests: filtered_requests,
+    consultation_requests: consultation_requests,
   });
 };
 
