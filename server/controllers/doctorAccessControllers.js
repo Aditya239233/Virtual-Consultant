@@ -165,8 +165,9 @@ const viewNotifications = async (request, response) => {
 };
 
 const acceptConsultationRequest = async (request, response) => {
+  console.log(request.body)
   const accepted_request = await consultationRequest.findOneAndDelete({
-    _id: ObjectId(request.data.id),
+    _id: ObjectId(request.body.id),
   });
   console.log(accepted_request);
   response.json({

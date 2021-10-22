@@ -16,6 +16,7 @@ const MessagePreview = (props) => {
         sender: props.sender,
       })
       .then((result) => {
+        console.log(props.id)
         axios
           .delete("/acceptconsultationrequest", {
             data: {
@@ -23,6 +24,7 @@ const MessagePreview = (props) => {
             },
           })
           .then(() => {
+            console.log("Consultation accepted")
             window.location.href = "http://localhost:3000/messenger";
           });
       })
