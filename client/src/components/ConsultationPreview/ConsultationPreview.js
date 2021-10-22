@@ -17,6 +17,7 @@ const MessagePreview = (props) => {
       })
       .then((result) => {
         console.log(props.id)
+        console.log(props);
         axios
           .delete("/acceptconsultationrequest", {
             data: {

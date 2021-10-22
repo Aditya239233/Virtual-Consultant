@@ -133,31 +133,30 @@ const viewNotifications = async (request, response) => {
     type: request.query["type"],
   });
   console.log(consultation_requests.length);
-  // for (let i = 0; i < consultation_requests.length; i++) {
-  //   severity = consultation_requests[i].severity_level;
-  //   timestamp = Math.round(consultation_requests[i].timestamp.getTime() / 1000);
-  //   today = Math.round(Date.now() / 1000);
-  //   let diffSeconds = today - timestamp;
-  //   console.log(today);
-  //   console.log("Hello");
-  //   console.log(timestamp);
-  //   //var diffMins = Math.round(((diffMilli % 86400000) % 3600000) / 60000);
-  //   if (severity == "High") {
-  //     if (diffSeconds < 600) {
-  //       filtered_requests.push(consultation_requests[i]);
-  //     }
-  //   }
-  //   if (severity == "Medium") {
-  //     if (diffSeconds < 1200) {
-  //       filtered_requests.push(consultation_requests[i]);
-  //     }
-  //   }
-  //   if (severity == "Low") {
-  //     if (diffSeconds < 1800) {
-  //       filtered_requests.push(consultation_requests[i]);
-  //     }
-  //   }
-  // }
+  for (let i = 0; i < consultation_requests.length; i++) {
+    severity = consultation_requests[i].severity_level;
+    timestamp = Math.round(consultation_requests[i].timestamp.getTime() / 1000);
+    today = Math.round(Date.now() / 1000);
+    let diffSeconds = today - timestamp;
+    console.log(consultation_requests[i]);
+    filtered_requests.push(consultation_requests[i]);
+    //var diffMins = Math.round(((diffMilli % 86400000) % 3600000) / 60000);
+    // if (severity == "High") {
+    //   if (diffSeconds < 600 || true) {
+    //     filtered_requests.push(consultation_requests[i]);
+    //   }
+    // }
+    // if (severity == "Medium") {
+    //   if (diffSeconds < 1200 || true) {
+    //     filtered_requests.push(consultation_requests[i]);
+    //   }
+    // }
+    // if (severity == "Low" || true) {
+    //   if (diffSeconds < 1800 || true) {
+    //     filtered_requests.push(consultation_requests[i]);
+    //   }
+    // }
+  }
   response.json({
     status: response.statusCode,
     consultation_requests: consultation_requests,
@@ -166,6 +165,7 @@ const viewNotifications = async (request, response) => {
 
 const acceptConsultationRequest = async (request, response) => {
   console.log(request.body)
+  console.log(request);
   const accepted_request = await consultationRequest.findOneAndDelete({
     _id: ObjectId(request.body.id),
   });

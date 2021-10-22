@@ -56,13 +56,21 @@ const Navbar = ({ auth: { isLoggedIn, user } }) => {
           <span className="topbarLink"></span>
         </div>
         {user.account_type === "patient" ? (
-          <a href="http://localhost:3000/consult">
+          <a
+            href="http://localhost:3000/consult"
+            style={{ textDecoration: "none" }}
+            className="links"
+          >
             <LocalHospital />
           </a>
         ) : null}
         <div className="topbarIcons">
           <div className="topbarIconItem">
-            <a href="http://localhost:3000/messenger">
+            <a
+              href="http://localhost:3000/messenger"
+              style={{ textDecoration: "none" }}
+              className="links"
+            >
               <Chat className="chatNotification"></Chat>
             </a>
           </div>
@@ -70,7 +78,7 @@ const Navbar = ({ auth: { isLoggedIn, user } }) => {
         {user.account_type === "doctor" ? (
           <div className="topbarIcons">
             <div className="topbarIconItem">
-              <a href="http://localhost:3000/notifications">
+              <a href="http://localhost:3000/notifications" className="links">
                 <Notifications className="notification"></Notifications>
               </a>
             </div>
@@ -80,11 +88,11 @@ const Navbar = ({ auth: { isLoggedIn, user } }) => {
         <div className="topbarIcons">
           <div className="topbarIconItem">
             {user && user.account_type === "doctor" ? (
-              <a href="/doctorprofile">
+              <a href="/doctorprofile" className="links">
                 <Person className="personPicture" />
               </a>
             ) : (
-              <a href="/patientprofile">
+              <a href="/patientprofile" className="links">
                 <Person className="personPicture" />
               </a>
             )}
