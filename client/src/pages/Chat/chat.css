@@ -1,0 +1,89 @@
+.messenger {
+  height: 80vh;
+  display: flex;
+}
+.chatMenu {
+  display: flex;
+  flex: 1;
+  position: sticky;
+}
+.chatMenuWrapper {
+  position: sticky;
+}
+.chatBody {
+  display: flex;
+  flex-direction: column;
+
+  flex: 4;
+  margin-top: 7%;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 3px;
+  padding: 15px;
+  margin-right: 5px;
+  height: fit-content;
+  width: 100%;
+
+  background-color: beige;
+}
+
+.chatHeader {
+  display: flex;
+  padding: 5px;
+  border-radius: 20px;
+  background-color: rgb(175, 175, 175);
+  margin-right: 5px;
+}
+.person {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.back {
+  size: 50px;
+  padding: 10px;
+  margin-top: 10px;
+  background-size: 20px;
+}
+.profilePhoto {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: 1;
+}
+.name {
+  font-size: large;
+  font-weight: 600;
+  flex-direction: column;
+  flex: 8;
+}
+.medicalID {
+  font-size: medium;
+  font-weight: 300;
+}
+
+.videoIcon {
+  display: flex-end;
+  padding-left: 550px;
+  align-items: baseline;
+  margin-top: 10px;
+}
+
+.callIcon {
+  display: flex-end;
+  align-items: baseline;
+  margin-top: 10px;
+}
+
+.chatWrapperReceive {
+  flex-direction: column;
+  background-color: red;
+  position: relative;
+  align-items: flex-end;
+}
+.chatWrapperSend {
+  flex-direction: column;
+  justify-content: right;
+  align-items: flex-end;
+}

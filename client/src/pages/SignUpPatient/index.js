@@ -6,7 +6,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
-import SignUpForm from "../../components/Forms/SignUpPatientForm";
+import SignUpPatient from "../../components/Forms/SignUpPatientForm";
 
 const theme = createTheme();
 
@@ -29,7 +29,7 @@ const SignUp = () => {
           <Typography component="h1" variant="h5">
             Sign Up as a Patient
           </Typography>
-          <SignUpForm />
+          <SignUpPatient />
         </Box>
       </Container>
     </ThemeProvider>

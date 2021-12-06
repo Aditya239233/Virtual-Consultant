@@ -128,6 +128,7 @@
   align-items: center;
   justify-content: space-around;
 }
+
 .topbarLink {
   margin-right: 10px;
   font-size: 14;
@@ -169,4 +170,8 @@
 
 .topbarLeft {
   flex: 3;
+}
+
+a.links:visited {
+  color: white;
 }
